@@ -1,0 +1,177 @@
+/* Flip card demo styles */
+* { 
+  padding: 0; 
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background: #000 url('https://cdn.pixabay.com/photo/2020/04/09/19/47/universe-5014530_1280.jpg') no-repeat center center;
+  color: rgba(123, 31, 162, 0.2);
+  width: 100vw;
+}
+/* particulas que simulan estrellas en el espacio */
+canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    color: black;
+}
+/* ?? Fondo de corazones cayendo */
+.loveRain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -100;
+    background: transparent;
+    overflow: hidden;
+    color: #444444; ;
+}
+.loveRain span {
+    position: absolute;
+    top: -50px;
+    opacity: 1;
+    animation: fall linear infinite;
+    font-size: 2em;
+}
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+/*body*/
+#title-1 {
+  position: fixed;
+  opacity: 0;
+}
+#title-2{
+  position: fixed;
+  background-color: #000000c8;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: hidden;
+  font-size: 1rem;
+  color: #9e13f5; ;
+}
+
+.img-Contenedor {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  height: 100vh;
+  gap: 20px;
+  padding: 20px;
+  margin: 0 60px;
+  grid-auto-flow: dense;
+}
+.card:nth-child(1) { grid-area: 2 / 2 / 4 / 4; }
+.card:nth-child(2) { grid-area: 1 / 1 / 2 / 3; }
+.card:nth-child(3) { grid-area: 1 / 3 / 2 / 4; }
+.card:nth-child(4) { grid-area: 1 / 4 / 3 / 5; }
+.card:nth-child(5) { grid-area: 3 / 4 / 4 / 5; }
+.card:nth-child(6) { grid-area: 4 / 3 / 5 / 5; }
+.card:nth-child(7) { grid-area: 4 / 2 / 5 / 3; }
+.card:nth-child(8) { grid-area: 3 / 1 / 5 / 2; }
+.card:nth-child(9) { grid-area: 2 / 1 / 3 / 2; }
+
+
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transform-style: preserve-3d; /* permite mostrar back*/
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.6s;
+  box-shadow: 0px 0px 5px 2px #9e13f5;
+}
+
+.card.flipped { transform: rotateY(180deg); } /*hace que la imgen gire 180 grados */
+
+.front {
+  background: rgba(255, 255, 255, 0);
+  position: absolute;
+  inset: 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden; /* oculta la 'parte posterior' de la cara cuando se gira */
+  border-radius: 12px;
+  padding: 0px;
+}
+.front img{ 
+  width: 100%;
+  height: 100%;
+  object-fit:cover; 
+  display:block; 
+  border-radius:12px; 
+  box-shadow: 0px 20px 20px rgba(123, 31, 162, 0.2);
+  cursor: pointer;
+  transition: 1s;
+}
+.front img:hover {
+  transform: scale(1.05);
+}
+
+.back {
+  width: 100%;
+  background: #ffebee; 
+  transform: rotateY(180deg); /* gira la cara posterior 180 grados para que esté oculta inicialmente, se presenta front */
+  position: absolute;
+  inset: 0; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden; /* oculta la 'parte posterior' de la cara cuando se gira */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  user-select: none;
+}
+.back h2 { 
+  margin: 0 0 8px 0; 
+}
+.back p { 
+  margin: 0; 
+  color: #444; 
+}
+
+@media (max-width: 799px) {
+  .img-Contenedor {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    margin: 10px 10px;
+    padding: 10px;
+    gap: 15px;
+    height: auto;
+    min-height: 100vh;
+  }
+  .card {
+    grid-area: auto !important;
+    height: 200px;
+    
+  }
+  #title-1{
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    opacity: 1;
+    color: #9e13f5;
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  #title-2 {
+    opacity: 0;
+  }
+}

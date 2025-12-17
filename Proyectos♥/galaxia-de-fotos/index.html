@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links-->
+    <script type="importmap">
+        { "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <link href="assets/styles.css" rel="stylesheet">
+    <title>Eres La Mejor del Mundo 💖</title>
+
+</head>
+<body>
+<!-- Botón de full screen, ahora arriba a la derecha -->
+    
+    <div id="title-container">
+        <h1 id="main-title"> Eres la mejor del mundo 💖</h1>
+    </div>
+    <div id="start-screen">
+        <div id="start-button">
+            <img src="https://i.pinimg.com/originals/29/57/f7/2957f7c7d2ef62de281dac2765bb7acb.gif"  inciar>
+        </div>
+    </div>
+    <!-- Modal para imagen y mensaje -->
+    <div id="image-modal">
+        <div id="modal-content">
+            <button id="close-modal">&times;</button>
+            <img id="modal-image"src="" alt="Imagen especial">
+            <div id="modal-message"></div>
+        </div>
+    </div>
+    <audio id="background-music" loop>
+        <source src="../coleción-de-imágenes/colección de imágenes/assets/I'm Not In Love.mp3" type="audio/mpeg">
+    </audio>
+    
+    <canvas id="galaxy-canvas"></canvas>
+    <!-- Contenedor oculto con datos de imágenes (usado por scripts.js) -->
+    <div id="image-data" style="display:none">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img1.jpeg" 
+        data-message="Eres una mujer tan hermosa que, cuando sonríes, el mundo se detiene solo para admirarte.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img2.jpeg" 
+        data-message="Tu manera de pensar es tan especial que inspira a cualquiera que te escucha">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img3.jpeg" 
+        data-message="Cada día a tu lado es una aventura maravillosa que nunca quiero que termine.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img4.jpeg" 
+        data-message="Tu bondad y generosidad son cualidades que hacen del mundo un lugar mejor.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img5.jpeg" 
+        data-message="Tú la mujer más bella que no solo se ve hermosa, sino que también irradia una luz interior que ilumina todo a su alrededor.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img6.jpeg" 
+        data-message="Eres mi rayo de sol en los días nublados, mi refugio en las tormentas de la vida.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img7.jpeg" 
+        data-message="Fuiste hecha para brillar, y cada vez que lo haces, el mundo se vuelve un lugar más hermoso.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img8.jpeg" 
+        data-message="Siempre que pienso en ti, sonrio sin darme cuenta.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img9.jpeg" 
+        data-message="Gracias por ser tú y por llenar mi vida de amor y felicidad.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img10.jpeg" 
+        data-message="Eres la definición misma de la belleza, tanto por dentro como por fuera.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img11.jpeg" 
+        data-message="Tu sonrisa tiene el poder de iluminar incluso los días más oscuros.">
+        <img class="image-canvas" src="../coleción-de-imágenes/colección de imágenes/assets/img/img12.jpeg" 
+        data-message="Cada momento contigo es un tesoro que guardo en mi corazón para siempre.">
+    </div>
+    <script src="assets/scripts.js" type="module"></script>
+</body>
+</html>

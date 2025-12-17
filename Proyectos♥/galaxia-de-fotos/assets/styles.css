@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rubik+Wet+Paint&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+* {
+	margin: 0; 
+	padding: 0; 
+	box-sizing: border-box; 
+	font-family: "Permanent Marker", cursive;
+	font-weight: 600;
+	font-style: normal;
+}
+body { 
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+canvas {
+	display: block; 
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+}
+/* div de Title */
+#title-container { 
+	position: fixed; /* Se mantiene en la ventana y queda encima del canvas */
+	display: flex;
+	background: transparent; /* No ocultar el canvas por detrás */
+	pointer-events: none; /* Permite interactuar con el canvas (ej. clicks) sin que el título lo bloquee */
+    top: 60px;
+    transform: none;
+	left: 50%;   
+    z-index: 100;  
+    opacity: 0;
+    animation: titleFadeIn 5s 6.5s forwards;
+    text-align: center;
+    padding: 0 1px;
+}
+#main-title {
+    background: linear-gradient(90deg, #00d4ff, #7b2ff7, #f107a3, #00d4ff) !important;
+    background-size: 200% 200% !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    filter: drop-shadow(0 0 20px rgba(0, 191, 255, 0.6)) !important;
+	font-size: 3.3em;
+	text-align: center;
+	z-index: 100;
+	font-family: 'Rubik Wet Paint', cursive;
+    animation: gradientFlow 5s ease infinite;
+    margin: 0 auto;
+    line-height: 1.2;
+	font-weight: 100;
+	font-style: normal;
+}
+
+@media (max-width: 768px) {
+	#title-container { 
+		width: 100%;
+		padding: 3px;
+		top: 70px;
+	}
+	#main-title { 
+		font-size: 2.5em;
+	}
+}
+@keyframes titleFadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-30px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+
+/* div de Start screen */
+#start-screen {
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000 0%, #0a1128 50%, #001f3f 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    z-index: 9999;           
+}
+
+
+#start-screen img{ 
+	width: 200px;
+	height: auto;
+	cursor: pointer; 
+    margin: 40px;
+	align-items: center;
+}
+
+
+#start-text {
+    background: linear-gradient(90deg, #00d4ff, #7b2ff7, #f107a3, #ff6b35, #00d4ff) !important;
+    background-size: 300% 300% !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: gradientFlow 4s ease infinite !important;
+    filter: drop-shadow(0 0 30px rgba(0, 191, 255, 0.7)) !important;
+	font-size: 40px; 
+	text-align: center; 
+	text-shadow: 0 6px 30px rgba(0,0,0,0.6); 
+	cursor: pointer; 
+}
+
+@media (max-width: 720px) {
+	#start-text { font-size: 24px; }
+}
+
+
+
+/* Modal */
+#image-modal {
+	position: fixed;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 2100;
+	background: rgba(0, 0, 0, 0.6);
+	transition: opacity 220ms ease;
+	user-select: none;
+}
+/* Mostrar el modal */
+#modal-content {
+	background: linear-gradient(180deg, rgba(10,12,20,0.95), rgba(5,6,12,0.98));
+	padding: 18px;
+	border-radius: 14px;
+	max-height: 100vh;
+	width: min(92vw, 880px);
+	box-shadow: 0 14px 50px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(0, 0, 0, 0.4);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 18px;
+	position: relative;
+}
+/* Estilo de la imagen dentro del modal */
+#modal-image {
+	display: block;
+	max-width: 100%;
+	width: 46%;
+	height: auto;
+	max-height: 60vh;
+	object-fit: cover;
+	border-radius: 10px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+/* Estilo del mensaje dentro del modal */
+#modal-message {
+	color: #e6f7ff;
+	font-size: 2.5em;
+	text-align: center;
+	padding: 16px 20px;
+	line-height: 1.35;
+	font-family: 'Rubik Wet Paint', cursive;
+	background: linear-gradient(90deg, rgba(0,212,255,0.06), rgba(123,47,247,0.04));
+	border-radius: 10px;
+	box-shadow: 0 8px 30px rgba(0, 157, 255, 0.06) inset;
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+	width: 52%;
+	user-select: none;
+	font-weight: 100;
+	font-style: normal;
+}
+
+@media (max-width: 720px) {
+	#modal-content { flex-direction: column; width: min(94vw, 420px); }
+	#modal-image { width: 100%; }
+	#modal-message { width: 100%; font-size: 1.5em; }
+}
+
+#close-modal {
+	position: absolute;
+	right: 10px;
+	top: 8px;
+	background: transparent;
+	border: 0;
+	color: #bfe9ff;
+	font-size: 30px;
+	cursor: pointer;
+	padding: 6px 10px;
+	border-radius: 8px;
+	transition: transform 1s ease;
+	z-index: 2200;
+}
+
+#close-modal:hover { transform: rotate(90deg); }
+
+

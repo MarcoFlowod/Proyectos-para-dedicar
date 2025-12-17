@@ -1,0 +1,125 @@
+/*Evitamos el Resaltado Azul de los Moviles*/
+* {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  user-select: none;         /* Evita seleccionar texto al tocar */
+  -webkit-user-select: none; /* Para Safari/iOS */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
+}
+
+/* Mesa */
+.soporte {
+  width: 370px;
+  left: -6px;
+}
+
+.soporte::before {
+  width: 100px;
+  height: 1000px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 18px;
+}
+
+.soporte::after {
+  width: 95px;
+  height: 1000px;
+  left: 85px;
+}
+
+/*Mensaje*/
+.happy-birthday {
+  top: -100%;
+  left: 120px;
+}
+
+/*Objetos de la mesa*/
+.portaretrato {
+  transform: scale(0.75);
+  left: 65px;
+  bottom: -12px;
+}
+
+.torta {
+  transform: scale(0.75);
+  left: 15px;
+  bottom: -20px;
+}
+
+.caja {
+  transform: scale(0.75);
+  left: -65px;
+  bottom: -26px;
+}
+
+.vela {
+  transform: scale(0.75);
+  bottom: 94px;
+  left: 145px;
+}
+
+.llama {
+  bottom: 160px;
+  left: 142px;
+}
+
+.carta {
+  animation: none; /* Evitar mini zoom */
+  transform: scale(0.8);
+  transform-origin: center center;
+  margin: 0 auto; /* Centrar horizontalmente */
+}
+
+/* Nuevo media query para pantallas más pequeñas */
+@media only screen and (max-width: 400px) {
+
+  .soporte {
+    width: 300px;
+  }
+
+  .soporte::after {
+    left: 45px;
+    top: 20px;
+  }
+
+  .happy-birthday {
+    font-size: 36px;
+    top: -100%;
+    left: 130px; 
+  }
+
+  .portaretrato {
+    transform: scale(0.65);
+    left: 92px;
+    bottom: -16px;
+  }
+
+  .torta {
+    transform: scale(0.63);
+    left: 17px;
+    bottom: -27px;
+  }
+
+  .caja {
+    transform: scale(0.65);
+    left: -100px;
+    bottom: -35px;
+  }
+
+  .vela {
+    transform: scale(0.65);
+    bottom: 74px;
+    left: 160px;
+  }
+
+  .llama {
+    bottom: 138px;
+    left: 157px;
+  }
+
+  .carta {
+    transform: scale(0.7);
+  }
+}
+
