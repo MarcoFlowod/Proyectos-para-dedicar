@@ -170,7 +170,7 @@ body {
     }
 }
 
-@media (max-width: 500px){
+@media (max-width: 480px){
   @keyframes shootingStar {
     0% {
         opacity: 0;
