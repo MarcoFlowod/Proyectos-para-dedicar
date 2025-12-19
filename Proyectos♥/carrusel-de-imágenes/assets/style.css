@@ -6,9 +6,41 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
+/* Fondo para el body */
 body {
-    height: 100vh;
-    background-color: #000;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 50%, #2d1b69 100%);
+    overflow-x: hidden;
+    position: relative;
+}
+
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Capa sutil de estrellas */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, #fff, transparent);
+    background-repeat: repeat;
+    background-size: 250px 250px;
+    z-index: -1;
+    opacity: 0.3;
 }
 #particulas {
     position: fixed;
@@ -17,17 +49,16 @@ body {
     z-index: 0;
     pointer-events: none;
 }
-.img-contedor {
+.img-contenedor {
     max-width: 1000px;
     margin: 0 auto;
     padding: 50px 0 80px 0;
 }
 
-.img-contedor h2 {
+.img-contenedor h2 {
     font-size: 2.5rem;
     font-weight: 400;
-    margin-bottom: 20px;
-    text-align: center;
+    margin-bottom: 10px;
     letter-spacing: 10px;
     background: linear-gradient(90deg, #00d4ff, #7b2ff7, #f107a3, #00d4ff) !important;
     background-size: 200% 200% !important;
@@ -42,28 +73,102 @@ body {
     width: 100%;
 }
 .swiper-slide {
-    background-position: center;
-    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     width: 300px;
     height: 500px;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 1s;
+    perspective: 1000px; 
 }
-.swiper-slide img {
+
+.swiper-slide.flipped .front {
+    transform: rotateY(180deg); /* ← Front gira y se oculta */
+    opacity: 0; /* Para asegurar que no sea visible */
+}
+
+.swiper-slide.flipped .back {
+    transform: rotateY(0deg); /* ← Back gira a posición normal */
+    opacity: 1; /* Se hace visible */
+}
+
+.front {
+    background: rgba(255, 255, 255, 0);
+    position: absolute;
+    inset: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 0px;
+    transition: transform 1s, opacity 0.6s; /* ← Añade transición */
+    transform: rotateY(0deg); /* ← Posición inicial */
+    opacity: 1; /* ← Visible inicialmente */
+    z-index: 2;
+}
+
+.front img { 
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+    object-fit: cover; 
+    border-radius: 12px; 
+    box-shadow: 0px 20px 20px rgba(123, 31, 162, 0.2);
+    cursor: pointer;
+    transition: 1s;
 }
-@media(max-width: 800px) {
-    body {
-        min-height: 0vh;
-    }
-    .img-contedor {
-        padding: 30px;
-        margin-top: 50px;
-    }
-    .img-contedor h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
+
+.back {
+    width: 100%;
+    background: #ffebee; 
+    transform: rotateY(180deg); /* ← Inicialmente girada */
+    position: absolute;
+    inset: 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    user-select: none;
+    transition: transform 1s, opacity 0.6s; /* ← Añade transición */
+    opacity: 0; /* ← Inicialmente invisible */
+    z-index: 1;
+}
+.fecha {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 5px;
+    border-radius:10px 0 5px 0;
+    background-color: #999595ae;
+    font-size: 0.7rem;
+    color: #797474;
+}
+.back h2 { 
+    margin: 0 0 8px 0; 
+    color: #7b2ff7;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.8rem;
+}
+
+.back p { 
+    margin: 0; 
+    color: #444; 
+    line-height: 1.6;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* Para traer card al frente cuando está activa */
+.swiper-slide.active {
+    z-index: 100 !important;
 }
