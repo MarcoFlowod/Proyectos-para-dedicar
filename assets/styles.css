@@ -260,14 +260,22 @@ body {
     gap: 15px;
     padding: 15px;
   }
-  .grid-item {
+  .grid-item:nth-child(4),
+  .grid-item:nth-child(5), 
+  .grid-item:nth-child(6),
+  .grid-item:nth-child(7),
+  .grid-item:nth-child(8),
+  .grid-item:nth-child(9),
+  .grid-item:nth-child(10),
+  .grid-item:nth-child(11),
+  .grid-item:nth-child(12) {
     animation-name: zoomIn;
     animation-timeline: view();
     animation-duration: 1s;
   }
   @keyframes zoomIn {
     from {
-      transform: scale(0.50);
+      transform: scale(0.80);
       filter: brightness(0.5);
       opacity: 0.5;
     }
