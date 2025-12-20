@@ -22,13 +22,101 @@
           <i class="fa-brands fa-whatsapp"></i>
           <h2>Whatsapp</h2>
         </a>
-        <a class="header-txt" href="marco/" target="_blank">
+        <a class="header-txt" id="openModalBtn" href="#" onclick="event.preventDefault()">
           <i class="fa-solid fa-download"></i>
           <h2>Descargas</h2>
         </a>
       </div>
-      
     </section>
+
+    <!-- MODAL PARA DESCARGAS -->
+    <div id="downloadModal" class="modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2 class="modal-title">🎁 Descargar Proyectos</h2>
+          <button id="closeModalBtn" class="modal-close-btn" aria-label="Cerrar modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="modal-content">
+          <div class="modal-info">
+            <div class="modal-icon">
+              <i class="fas fa-gift"></i>
+            </div>
+            <h3>¡Proyectos Especiales para Ti!</h3>
+            <p class="modal-description">
+              Aquí puedes descargar todos los proyectos que se han creado con amor y dedicación. 
+              Cada uno es único y especial, listo para personalizar según tus necesidades.
+            </p>
+            
+            <div class="projects-list">
+              <div class="project-item">
+                <i class="fas fa-heart"></i>
+                <div class="project-info">
+                  <h4>Proyectos Románticos</h4>
+                  <p>Cartas, galerías y sorpresas especiales.</p>
+                </div>
+              </div>
+              
+              <div class="project-item">
+                <i class="fas fa-images"></i>
+                <div class="project-info">
+                  <h4>Galerías Interactivas</h4>
+                  <p>Carruseles, collages y efectos visuales.</p>
+                </div>
+              </div>
+              
+              <div class="project-item">
+                <i class="fas fa-magic"></i>
+                <div class="project-info">
+                  <h4>Efectos Especiales</h4>
+                  <p>Animaciones, zooms y transiciones.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="download-options">
+              <a href="https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip" download="proyectos-especiales.zip" class="download-all-btn">
+                <i class="fas fa-download"></i> Descargar Todos
+              </a>
+            </div>
+            
+            <div class="modal-footer">
+              <p><small>📦 Todos los proyectos incluyen: HTML, CSS, JavaScript e imágenes.</small></p>
+              <p><small>💖 Hecho con mucho cariño para ocasiones especiales.</small></p>
+            </div>
+          </div>
+          
+          <div class="modal-preview">
+            <div class="preview-container">
+              <img id="previewImage" src="./assets/img/imagen-1.png" title="Ver proyecto" alt="Vista previa de proyecto">
+              <div class="preview-info">
+                <h4 id="previewTitle">RAMO DE TULIPANES ROSADOS</h4>
+                <a href="https://github.com/MarcoFlowod/Proyectos-para-dedicar" download="proyectos-especiales.zip" class="preview-link">
+                  <i class="fas fa-download"></i> Descargar
+                </a>
+                <div class="preview-tags">
+                  <span class="tag">Romántico</span>
+                  <span class="tag">HTML/CSS</span>
+                  <span class="tag">Responsive</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="preview-controls">
+              <button class="preview-btn" id="prevPreview">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <span class="preview-counter">1/12</span>
+              <button class="preview-btn" id="nextPreview">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section class="proyectos-container">
       <!--            -->
@@ -177,5 +265,7 @@
       </a>
       
     </section>
+
+    <script src="assets/modal.js"></script>
   </body>
 </html>
