@@ -65,15 +65,12 @@ function iniciarAnimacionYMusica() {
     
     // Imágenes flotantes
     const imgUrls = [
-        "../collage-de-imágenes/assets/img/img1.jpeg",
-        "../collage-de-imágenes/assets/img/img2.jpeg",
-        "../collage-de-imágenes/assets/img/img3.jpeg",
-        "../collage-de-imágenes/assets/img/img4.jpeg",
-        "../collage-de-imágenes/assets/img/img5.jpeg",
-        "../collage-de-imágenes/assets/img/img6.jpeg",
-        "../collage-de-imágenes/assets/img/img7.jpeg",
-        "../collage-de-imágenes/assets/img/img8.jpeg",
-        "../collage-de-imágenes/assets/img/img9.jpeg",
+        "../imagenes/img1.jpeg",
+        "../imagenes/img2.jpeg",
+        "../imagenes/img3.jpeg",
+        "../imagenes/img4.jpeg",
+        "../imagenes/img5.jpeg",
+        "../imagenes/img6.jpeg",
     ];
     
     const imgObjs = imgUrls.map(url => {
