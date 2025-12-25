@@ -18,85 +18,96 @@ document.addEventListener('DOMContentLoaded', function() {
       title: 'RAMO DE TULIPANES ROSADOS',
       tags: ['Romántico', 'HTML/CSS', 'Responsive'],
       link: './Proyectos♥/ramo-de-tulipanes-rosados/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/tulipanes-rosados/archive/refs/heads/main.zip',
+      status: 'completado'
     },
     {
       img: './assets/img/imagen-2.png',
       title: 'CARRUSEL DE IMÁGENES',
       tags: ['Interactivo', 'JavaScript', 'Responsive'],
       link: './Proyectos♥/carrusel-de-imágenes/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar',
-      dis: "en pto"
+      githubDownload: 'https://github.com/MarcoFlowod/carrusel/archive/refs/heads/main.zip',
+      status: 'completado'
     },
     {
       img: './assets/img/imagen-3.png',
       title: 'COLECCIÓN DE IMÁGENES',
       tags: ['Interactivo', 'Animaciones', 'Flip Effect'],
       link: './Proyectos♥/coleción-de-imágenes/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'completado'
     },
     {
       img: './assets/img/imagen-4.png',
       title: 'COLLAGE INTERACTIVO',
-      tags: ['En Proceso', 'Interactivo', 'Moderno'],
+      tags: ['En Proceso'],
       link: './Proyectos♥/collage-de-imágenes/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'en-proceso'
     },
     {
       img: './assets/img/imagen-5.png',
       title: 'ZOOM DE GALAXIA',
-      tags: ['En Proceso', 'Efectos', 'Galaxia'],
+      tags: ['En Proceso'],
       link: './Proyectos♥/zoom-galaxia/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'en-proceso'
     },
     {
       img: './assets/img/imagen-6.png',
       title: 'GALAXIA DE FOTOS',
-      tags: ['En Proceso', 'Galaxia', 'Efectos 3D'],
+      tags: ['En Proceso'],
       link: './Proyectos♥/galaxia-de-fotos/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'en-proceso'
     },
     {
       img: './assets/img/imagen-7.png',
       title: 'FELIZ CUMPLEAÑOS',
       tags: ['Celebración', 'HTML/CSS', 'Animado'],
       link: './Proyectos♥/feliz-cumpleaños/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'completado'
     },
     {
       img: './assets/img/imagen-8.png',
       title: 'CARTA DE AMOR',
       tags: ['Romántico', 'Carta', 'Elegante'],
       link: './Proyectos♥/carta-para-dedicar/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'completado'
     },
     {
       img: './assets/img/imagen-9.png',
       title: 'GALAXIA DE FRASES',
       tags: ['Frases', 'Galaxia', 'Inspirador'],
       link: './Proyectos♥/galxia-de-frases/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'completado'
     },
     {
       img: './assets/img/imagen-10.png',
       title: 'NUESTRO TIEMPO JUNTOS',
       tags: ['Romántico', 'Tiempo', 'Memorias'],
       link: './Proyectos♥/nuestro-tiempo-juntos/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'completado'
     },
     {
       img: './assets/img/imagen-11.png',
       title: 'PROPUESTA ♡',
       tags: ['Romántico', 'Propuesta', 'Especial'],
       link: './Proyectos♥/Popuesta◑﹏◐/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'completado'
     },
     {
       img: './assets/img/imagen-12.png',
       title: 'CORAZÓN NEGRO',
-      tags: ['En Proceso', 'Corazón', 'Animaciones'],
+      tags: ['En Proceso'],
       link: './Proyectos♥/corazón-negro/index.html',
-      github: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar'
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+      status: 'en-proceso'
     }
   ];
   
@@ -124,7 +135,32 @@ document.addEventListener('DOMContentLoaded', function() {
       ).join('');
     }
     
-    // Actualizar estado de botones
+    // Actualizar botón según el estado del proyecto
+    const downloadLink = document.querySelector('.preview-link');
+    if (downloadLink) {
+      if (project.status === 'en-proceso') {
+        // Proyectos en proceso
+        downloadLink.href = '#';
+        downloadLink.removeAttribute('download');
+        downloadLink.innerHTML = '<i class="fas fa-clock"></i> En Proceso';
+        downloadLink.classList.add('en-proceso');
+        downloadLink.classList.remove('descargable');
+        downloadLink.onclick = function(e) {
+          e.preventDefault();
+          alert('Este proyecto aún está en desarrollo. Próximamente estará disponible para descargar.');
+        };
+      } else {
+        // Proyectos completados
+        downloadLink.href = project.githubDownload;
+        downloadLink.setAttribute('download', 'proyectos-especiales.zip');
+        downloadLink.innerHTML = '<i class="fas fa-download"></i> Descargar ZIP';
+        downloadLink.classList.add('descargable');
+        downloadLink.classList.remove('en-proceso');
+        downloadLink.onclick = null; // Quitar cualquier evento previo
+      }
+    }
+    
+    // Actualizar estado de botones de navegación
     prevPreviewBtn.disabled = currentPreviewIndex === 0;
     nextPreviewBtn.disabled = currentPreviewIndex === projects.length - 1;
     
