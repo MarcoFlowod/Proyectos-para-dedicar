@@ -4,29 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Te quiero♥</title>
-    <link rel="stylesheet" href="assets/styles.css" >
-    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="loveRain"></canvas>
-<!-- sirve para que el h1 este estilizado-->
-    <div class="galaxy-overlay"></div>
+    <!-- Audio para música -->
+    <audio id="backgroundMusic" loop>
+        <source src="assets/Down With My Baby-Kevin Johansen.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
 
-    <div class="title-container">
-        <div class="pixel-corner"></div>
-        <div class="pixel-corner"></div>
-        <div class="pixel-corner"></div>
-        <div class="pixel-corner"></div>
-        <h1 class="title"> 
-            <a href="coleccion.html" style="color:#ff5555;">TE QUIERO</a>
-        </h1>
-    </div>
+    <!-- Pantalla 1: Te Quiero -->
+    <section id="startScreen" class="start-screen active-screen">
+        <canvas id="loveRain"></canvas>
+        <div class="galaxy-overlay"></div>
 
+        <div class="title-container">
+            <div class="pixel-corner"></div>
+            <div class="pixel-corner"></div>
+            <div class="pixel-corner"></div>
+            <div class="pixel-corner"></div>
+            <h1 class="title"> 
+                <a href="#" id="teQuieroLink" style="color:#ff5555;">TE QUIERO</a>
+            </h1>
+        </div>
+        <div class="instructions">
+            <p>Haz clic en "TE QUIERO" para ver nuestros recuerdos♥</p>
+        </div>
+    </section>
 
-    
-    <script src="assets/script.js"></script>
+    <!-- Pantalla 2: Recuerdos -->
+    <section id="memoriesScreen" class="memories-screen">
+        <!-- Lluvia de corazones y efecto de partículas -->
+        <div class="rain" id="rain"></div>
+        <canvas id="loveRain2"></canvas>
+        
+        <div class="arriba-text">
+            <h1>Nuestros Recuerdos 💞</h1>
+        </div>
 
+        <button id="backButton" class="back-button">← Volver</button>
 
+        <div class="collage-container" id="collage-container">
+            <!-- Imágenes del collage -->
+            <div class="collage-item" tabindex="0" data-index="0">
+                <img src="imagenes/img1.jpeg" alt="Recuerdo 1" title="Te quiero, hermosa" 
+                data-title="30/11/2025" 
+                data-text="Eres la persona que más amo en este mundo y quiero pasar el resto de mi vida a tu lado. Cada momento contigo es un tesoro que guardo en mi corazón. Te amo con todo mi ser.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="1">
+                <img src="imagenes/img2.jpeg" alt="Recuerdo 2" title="Eres la más bella"
+                data-title="11/11/2025" 
+                data-text="tú y yo somos el uno para el otro, y cada día a tu lado es un regalo que atesoro profundamente.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="2">
+                <img src="imagenes/img3.jpeg" alt="Recuerdo 3" title="Eres perfecta"
+                data-title="30/11/2025" 
+                data-text="eres la razón por la que sonrío cada día y la persona con la que quiero compartir todos mis momentos felices y desafiantes.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="3">
+                <img src="imagenes/img4.jpeg" alt="Recuerdo 4" title="Mi solecito"
+                data-title="30/11/2025" 
+                data-text="fuiste, eres y siempre serás mi mayor bendición y el amor de mi vida.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="4">
+                <img src="imagenes/img5.jpeg" alt="Recuerdo 5" title="Mi princesa"
+                data-title="30/11/2025" 
+                data-text="Eres mi todo, mi amor eterno y la persona con la que quiero construir un futuro lleno de felicidad y amor incondicional.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="5">
+                <img src="imagenes/img6.jpeg" alt="Recuerdo 6" title="Mi felicidad"
+                data-title="30/11/2025" 
+                data-text="la vida es mucho más hermosa desde que estás a mi lado, y cada día contigo es un regalo que valoro profundamente.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="6">
+                <img src="imagenes/img7.jpeg" alt="Recuerdo 7" 
+                data-title="30/11/2025" 
+                data-text="si me das la oportunidad, prometo amarte, cuidarte y hacerte feliz todos los días de mi vida.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="7">
+                <img src="imagenes/img8.jpeg" alt="Recuerdo 8" 
+                data-title="30/11/2025" 
+                data-text="guiaré mi vida por el camino del amor y la felicidad junto a ti.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="8">
+                <img src="imagenes/img9.jpeg" alt="Recuerdo 9" 
+                data-title="30/11/2025" 
+                data-text="contigo he aprendido el verdadero significado del amor y la felicidad, y cada día a tu lado es un regalo que atesoro profundamente.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="9">
+                <img src="imagenes/img10.jpeg" alt="Recuerdo 10" 
+                data-title="30/11/2025" 
+                data-text="hermosa es la vida desde que estás a mi lado, y cada momento contigo es un tesoro que guardo en mi corazón.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="10">
+                <img src="imagenes/img11.jpeg" alt="Recuerdo 11" 
+                data-title="30/11/2025" 
+                data-text="siempre serás mi persona favorita en este mundo y el amor de mi vida.">
+            </div>
+            <div class="collage-item" tabindex="0" data-index="11">
+                <img src="imagenes/img12.jpeg" alt="Recuerdo 12" 
+                data-title="30/11/2025" 
+                data-text="cada día a tu lado es un regalo que valoro profundamente, y no puedo esperar para seguir construyendo recuerdos juntos.">
+            </div>
 
+            <!-- Modal para mostrar imagen ampliada -->
+            <div id="modal" class="modal">
+                <div class="modal-content-wrapper">
+                    <div class="flip-card" id="flip-card" tabindex="0" aria-label="Imagen ampliada. Presiona Enter o Espacio para girar">
+                        <button type="button" class="close-button" aria-label="Cerrar imagen" title="Cerrar imagen">&times;</button>
+                        <div class="flip-card-inner" id="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img class="modal-content" id="modal-image" />
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="stars">
+                                    <div class="space space-1"></div>
+                                    <div class="space space-2"></div>
+                                    <div class="space space-3"></div>
+                                </div>
+                                <h2 class="modal-title" id="modal-title"></h2>
+                                <p class="modal-text" id="modal-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
