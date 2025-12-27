@@ -14,6 +14,7 @@ canvas {
     left: 0;
     z-index: 1;
 }
+
 .title-container {
     position: absolute;
     top: 50%;
@@ -40,6 +41,9 @@ canvas {
     box-shadow: 
         0 0 20px #ff0000,
         inset 0 0 20px #ff0000;
+}
+a {
+    color: #ff5555;
 }
 @keyframes heartbeat {
     0% { transform: rotateX(10deg) rotateY(-5deg) scale(1); }
@@ -114,3 +118,4 @@ h1 a:hover {
         0 0 20px #f93535,
         0 0 30px #ff0000;
 }
+

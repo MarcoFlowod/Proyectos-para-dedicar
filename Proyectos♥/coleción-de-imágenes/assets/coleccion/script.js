@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* particulas que simulas estrellas del espacio */
-        const canvas = document.getElementById('loveRain');
+        const canvas = document.getElementById('lluviaHeart');
         const ctx = canvas.getContext('2d');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;

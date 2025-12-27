@@ -33,7 +33,7 @@ canvas {
 	left: 50%;   
     z-index: 100;  
     opacity: 0;
-    animation: titleFadeIn 5s 6.5s forwards;
+    animation: titleFadeIn 9s 6.3s forwards;
     text-align: center;
     padding: 0 1px;
 }
@@ -48,28 +48,57 @@ canvas {
 	text-align: center;
 	z-index: 100;
 	font-family: 'Rubik Wet Paint', cursive;
-    animation: gradientFlow 5s ease infinite;
+    animation: gradientFlow 5s ease infinite ;
     margin: 0 auto;
     line-height: 1.2;
 	font-weight: 100;
 	font-style: normal;
 }
 
+
+@keyframes titleFadeIn {
+    0% { 
+		opacity: 0; 
+		transform: translateX(-50%) translateY(-30px); 
+		font-size: 9px;
+	}
+	96% {
+		opacity: 1; 
+		transform: translateX(-50%) translateY(0px); 
+		font-size: 15px;
+	}
+    100% { 
+		opacity: 0; 
+		transform: translateX(-50%) translateY(0px); 
+	}
+}
 @media (max-width: 768px) {
 	#title-container { 
 		width: 100%;
+		margin: 0;
 		padding: 3px;
 		top: 70px;
 	}
 	#main-title { 
 		font-size: 2.5em;
 	}
-}
-@keyframes titleFadeIn {
-    from { opacity: 0; transform: translateX(-50%) translateY(-30px); }
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
 
+	@keyframes titleFadeIn {
+    0% { 
+		opacity: 0; 
+		transform: translateX(-50%) translateY(-30px); 
+		font-size: 13px;
+	}
+	96% {
+		opacity: 1; 
+		transform: translateX(-50%) translateY(0px);  
+	}
+    100% { 
+		opacity: 0; 
+		transform: translateX(-50%) translateY(0px); 
+	}
+}
+}
 
 /* div de Start screen */
 #start-screen {
