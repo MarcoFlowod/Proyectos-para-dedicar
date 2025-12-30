@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const previewImage = document.getElementById('previewImage');
   const previewTitle = document.getElementById('previewTitle');
   const previewCounter = document.querySelector('.preview-counter');
+
+  // ========== PANTALLA DE CARGA ==========
+    const loaderWrapper = document.getElementById('loader-wrapper');
+    const videoContainer = document.getElementById('loader-container');
+    const iframe = document.querySelector('iframe');
   
   // ========== DATOS DE PROYECTOS ==========
   const projects = [
@@ -110,6 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
       status: 'en-proceso'
     }
   ];
+      // Ocultar el loader inmediatamente si el iframe no se carga (ej. no hay internet)
+    setTimeout(() => {
+        loaderWrapper.classList.add('hidden');
+        videoContainer.style.display = 'block';
+    }, 2000); // Tiempo de espera en milisegundos
   
   let currentPreviewIndex = 0;
   let isModalOpen = false;

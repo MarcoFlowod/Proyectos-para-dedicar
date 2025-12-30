@@ -11,6 +11,50 @@
     <title>Detalles Creeper</title>
   </head>
   <body>
+<!--============================          =========================-->
+<!--============================ LOADING  =========================-->
+<!--============================          =========================-->
+    <section class="loading-screen" id="loadingScreen">
+      <div class="loading-content">
+        <!-- Animación del creeper -->
+        <div class="creeper-animation">
+          <div class="creeper-face">
+            <div class="creeper-eye left-eye"></div>
+            <div class="creeper-eye right-eye"></div>
+            <div class="creeper-mouth"></div>
+          </div>
+          <div class="creeper-body">
+            <div class="pixel pixel-1"></div>
+            <div class="pixel pixel-2"></div>
+            <div class="pixel pixel-3"></div>
+            <div class="pixel pixel-4"></div>
+          </div>
+        </div>
+        
+        <!-- Texto de carga -->
+        <div class="loading-text">
+          <h2 class="loading-title">Cargando proyectos especiales...</h2>
+          <p class="loading-subtitle">Preparando sorpresas con 💖</p>
+        </div>
+        
+        <!-- Barra de progreso -->
+        <div class="loading-bar-container">
+          <div class="loading-bar" id="loadingBar"></div>
+          <div class="loading-percentage" id="loadingPercentage">0%</div>
+        </div>
+        
+        <!-- Frases aleatorias -->
+        <div class="loading-quote">
+          <p id="loadingQuote">"El amor no se mira, se siente; y aún más fuerte, se lleva en el corazón."</p>
+        </div>
+        
+        <!-- Contador de proyectos -->
+        <div class="projects-counter">
+          <i class="fas fa-gift"></i>
+          <span id="projectsCount">Cargando <span class="count-number">12</span> proyectos especiales</span>
+        </div>
+      </div>
+    </section>
 <!--============================         =========================-->
 <!--============================ HEADER  =========================-->
 <!--============================         =========================-->
@@ -126,7 +170,7 @@
 <!--============================            =========================-->
 <!--============================ PROYECTOS  =========================-->
 <!--============================            =========================-->
-    <section class="proyectos-container">
+    <section class="proyectos-container" id="proyectos-container">
       <!--            -->
       <!-- proyecto 1 -->
       <!--            -->
@@ -275,5 +319,6 @@
     </section>
 
     <script src="assets/modal.js"></script>
+    <script src="assets/loading.js"></script>
   </body>
 </html>
