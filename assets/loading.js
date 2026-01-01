@@ -1,4 +1,4 @@
-// assets/loading.js - CON MATRIZ 8x8
+// assets/loading.js - CON 5 SEGUNDOS MÁXIMO
 
 document.addEventListener('DOMContentLoaded', function() {
   const creeperHead = document.getElementById('creeperHead');
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     "¡Iniciando la aventura!"
   ];
   
-  // Matriz 8x8 para la cara del creeper (EXACTAMENTE como la pediste)
+  // Matriz 8x8 para la cara del creeper
   const faceMatrix = [
     [0,0,0,0,0,0,0,0],
     [0,1,1,0,0,1,1,0],
@@ -58,10 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Función para crear la cara del creeper con matriz 8x8
   function createCreeperFace() {
-    // Limpiar cualquier contenido previo
     creeperFace.innerHTML = '';
-    
-    // Cambiar el grid a 8x8
     creeperFace.style.gridTemplateColumns = 'repeat(8, 1fr)';
     creeperFace.style.gridTemplateRows = 'repeat(8, 1fr)';
     creeperFace.style.gap = '1px';
@@ -73,19 +70,16 @@ document.addEventListener('DOMContentLoaded', function() {
         pixel.className = 'pixel';
         
         if (faceMatrix[row][col] === 1) {
-          // Píxeles negros (ojos y boca)
           pixel.style.backgroundColor = '#000000';
           pixel.style.boxShadow = 'inset 0 0 2px rgba(255, 255, 255, 0.2)';
           pixel.style.borderRadius = '1px';
         } else {
-          // Píxeles verdes con variaciones sutiles
           const greenValue = 90 + Math.random() * 40;
           const blueValue = 30 + Math.random() * 20;
           pixel.style.backgroundColor = `rgb(30, ${greenValue}, ${blueValue})`;
           pixel.style.boxShadow = 'inset 0 0 1px rgba(0, 0, 0, 0.5)';
           pixel.style.borderRadius = '1px';
           
-          // Añadir efecto de profundidad a los píxeles verdes
           if (Math.random() > 0.5) {
             pixel.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
             pixel.style.borderLeft = '1px solid rgba(255, 255, 255, 0.1)';
@@ -94,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         }
         
-        // Efecto hover sutil
         pixel.addEventListener('mouseenter', () => {
           if (faceMatrix[row][col] === 0) {
             pixel.classList.add('active');
@@ -102,30 +95,17 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
         
-        // Efecto al hacer clic (opcional)
-        pixel.addEventListener('click', () => {
-          if (faceMatrix[row][col] === 0) {
-            pixel.style.backgroundColor = '#4ade80';
-            setTimeout(() => {
-              const greenValue = 90 + Math.random() * 40;
-              const blueValue = 30 + Math.random() * 20;
-              pixel.style.backgroundColor = `rgb(30, ${greenValue}, ${blueValue})`;
-            }, 200);
-          }
-        });
-        
         creeperFace.appendChild(pixel);
       }
     }
     
-    // Añadir efecto de brillo específico para los ojos
+    // Ojos parpadeantes
     setTimeout(() => {
       const pixels = creeperFace.querySelectorAll('.pixel');
       pixels.forEach((pixel, index) => {
         const row = Math.floor(index / 8);
         const col = index % 8;
         
-        // Los ojos parpadean aleatoriamente
         if (faceMatrix[row][col] === 1) {
           setInterval(() => {
             if (Math.random() > 0.7) {
@@ -150,14 +130,13 @@ document.addEventListener('DOMContentLoaded', function() {
         imagesLoaded++;
         updateProgress();
         
-        // Efecto visual cuando se carga una imagen
         if (index % 2 === 0) {
           animateDiagonalPixels();
         }
       };
       
       img.onerror = () => {
-        imagesLoaded++; // Contar incluso si falla
+        imagesLoaded++;
         updateProgress();
       };
     });
@@ -198,16 +177,14 @@ document.addEventListener('DOMContentLoaded', function() {
       animateAllGreenPixels();
     }
     
-    // Animar píxeles aleatorios cada cierto progreso
     if (totalProgress % 8 < 1) {
       animateRandomPixels();
     }
   }
   
-  // Animaciones específicas para la cara 8x8
+  // Animaciones específicas
   function animateEyes() {
     const pixels = creeperFace.querySelectorAll('.pixel');
-    // Ojo izquierdo (fila 1, columnas 1-2)
     for (let i = 0; i < pixels.length; i++) {
       const row = Math.floor(i / 8);
       const col = i % 8;
@@ -222,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function animateMouth() {
     const pixels = creeperFace.querySelectorAll('.pixel');
-    // Boca (filas 4-6, columnas 2-5)
     for (let i = 0; i < pixels.length; i++) {
       const row = Math.floor(i / 8);
       const col = i % 8;
@@ -238,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function animateDiagonalPixels() {
     const pixels = creeperFace.querySelectorAll('.pixel');
-    for (let i = 0; i < pixels.length; i += 9) { // Diagonal principal
+    for (let i = 0; i < pixels.length; i += 9) {
       if (i < pixels.length) {
         const row = Math.floor(i / 8);
         const col = i % 8;
@@ -252,7 +228,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   function animateBorderPixels() {
     const pixels = creeperFace.querySelectorAll('.pixel');
-    // Bordes exteriores
     for (let i = 0; i < pixels.length; i++) {
       const row = Math.floor(i / 8);
       const col = i % 8;
@@ -272,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const row = Math.floor(i / 8);
       const col = i % 8;
       
-      // Patrón de ajedrez
       if ((row + col) % 2 === 0 && faceMatrix[row][col] === 0) {
         pixels[i].classList.add('active');
         setTimeout(() => pixels[i].classList.remove('active'), 150);
@@ -305,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
           pixels[index].classList.add('active');
           setTimeout(() => pixels[index].classList.remove('active'), 100);
-        }, i * 30);
+        }, i * 20); // Más rápido para 5 segundos
       }
     });
   }
@@ -319,13 +293,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (faceMatrix[row][col] === 0) {
         setTimeout(() => {
           pixel.classList.add('active');
-          setTimeout(() => pixel.classList.remove('active'), 300);
-        }, i * 10);
+          setTimeout(() => pixel.classList.remove('active'), 200);
+        }, i * 5); // Mucho más rápido
       }
     });
   }
   
-  // Animar píxeles aleatorios
   function animateRandomPixels() {
     const pixels = document.querySelectorAll('.pixel');
     const greenPixels = Array.from(pixels).filter((pixel, i) => {
@@ -334,7 +307,6 @@ document.addEventListener('DOMContentLoaded', function() {
       return faceMatrix[row][col] === 0;
     });
     
-    // Seleccionar 5 píxeles aleatorios verdes
     const randomPixels = greenPixels
       .sort(() => Math.random() - 0.5)
       .slice(0, 5);
@@ -342,8 +314,8 @@ document.addEventListener('DOMContentLoaded', function() {
     randomPixels.forEach((pixel, i) => {
       setTimeout(() => {
         pixel.classList.add('active');
-        setTimeout(() => pixel.classList.remove('active'), 500);
-      }, i * 100);
+        setTimeout(() => pixel.classList.remove('active'), 300);
+      }, i * 80);
     });
   }
   
@@ -354,41 +326,40 @@ document.addEventListener('DOMContentLoaded', function() {
       particle.className = 'particle';
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.top = `${Math.random() * 100}%`;
-      particle.style.animation = `particleFloat ${2 + Math.random() * 3}s infinite`;
-      particle.style.animationDelay = `${Math.random() * 2}s`;
+      particle.style.animation = `particleFloat ${1 + Math.random() * 2}s infinite`;
+      particle.style.animationDelay = `${Math.random() * 1}s`;
       loadingScreen.appendChild(particle);
     }
     
-    // Añadir keyframes para partículas
     const style = document.createElement('style');
     style.textContent = `
       @keyframes particleFloat {
-        0% {
-          transform: translate(0, 0) scale(0);
-          opacity: 0;
-        }
-        50% {
-          opacity: 0.5;
-          transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(1);
-        }
-        100% {
-          transform: translate(0, 0) scale(0);
-          opacity: 0;
-        }
+        0% { transform: translate(0, 0) scale(0); opacity: 0; }
+        50% { opacity: 0.5; transform: translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px) scale(1); }
+        100% { transform: translate(0, 0) scale(0); opacity: 0; }
       }
     `;
     document.head.appendChild(style);
   }
   
-  // Iniciar carga
+  // Iniciar carga - VELOCIDAD AJUSTADA PARA 5 SEGUNDOS
   function startLoading() {
     const interval = setInterval(() => {
-      // Incremento progresivo
-      let increment = 0.5 + Math.random() * 2;
+      // INCREMENTO MÁS RÁPIDO para completar en ~5 segundos
+      let increment;
+      if (progress < 40) {
+        increment = 1.5 + Math.random() * 3; // 1.5-4.5%
+      } else if (progress < 70) {
+        increment = 1 + Math.random() * 2; // 1-3%
+      } else if (progress < 90) {
+        increment = 0.5 + Math.random() * 1.5; // 0.5-2%
+      } else {
+        increment = 0.2 + Math.random() * 0.8; // 0.2-1%
+      }
       
-      // Si las imágenes ya están cargadas, acelerar
-      if (imagesLoaded >= imagesToPreload.length * 0.8) {
-        increment += 1;
+      // ACELERAR si las imágenes ya están cargadas
+      if (imagesLoaded >= imagesToPreload.length * 0.6) {
+        increment *= 1.5;
       }
       
       progress += increment;
@@ -405,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       updateProgress();
       
-    }, 150);
+    }, 120); // Intervalo más rápido (120ms vs 150ms original)
   }
   
   // Finalizar carga
@@ -414,10 +385,9 @@ document.addEventListener('DOMContentLoaded', function() {
     progressFill.style.width = '100%';
     progressText.textContent = '100%';
     
-    // Animación final: todos los píxeles se animan
+    // Animación final rápida
     animateAllGreenPixels();
     
-    // Los ojos parpadean rápido
     const pixels = creeperFace.querySelectorAll('.pixel');
     const blinkInterval = setInterval(() => {
       pixels.forEach((pixel, i) => {
@@ -427,12 +397,11 @@ document.addEventListener('DOMContentLoaded', function() {
           pixel.style.backgroundColor = Math.random() > 0.5 ? '#ff4444' : '#000';
         }
       });
-    }, 100);
+    }, 80); // Parpadeo más rápido
     
     setTimeout(() => {
       clearInterval(blinkInterval);
       
-      // Restaurar colores originales
       pixels.forEach((pixel, i) => {
         const row = Math.floor(i / 8);
         const col = i % 8;
@@ -442,41 +411,42 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       
       // Animación de explosión
-      creeperHead.style.animation = 'headExplode 1s ease forwards';
+      creeperHead.style.animation = 'headExplode 0.8s ease forwards';
       createParticles();
       
-      // Fade out de toda la pantalla
+      // Fade out rápido
       setTimeout(() => {
-        loadingScreen.style.animation = 'screenFadeOut 0.8s ease forwards';
+        loadingScreen.style.animation = 'screenFadeOut 0.6s ease forwards';
         
-        // Ocultar completamente
         setTimeout(() => {
           loadingScreen.style.display = 'none';
           document.body.style.overflow = 'auto';
           
-          // Asegurar que las imágenes se muestren
           document.querySelectorAll('img').forEach(img => {
             if (img.complete) {
               img.style.opacity = '1';
-              img.style.transition = 'opacity 0.5s ease';
+              img.style.transition = 'opacity 0.3s ease';
             }
           });
-        }, 800);
-      }, 1000);
-    }, 1500);
+        }, 600);
+      }, 800);
+    }, 800); // Animación final más corta
   }
   
   // Iniciar proceso
   preloadImages();
   createParticles();
-  setTimeout(startLoading, 300);
+  setTimeout(startLoading, 200); // Delay inicial más corto
   
-  // Backup timeout
+  // ==============================================
+  // ¡BACKUP AJUSTADO A 5 SEGUNDOS! (5000ms)
+  // ==============================================
   setTimeout(() => {
     if (progress < 100) {
+      console.log("Backup a 5 segundos: Forzando finalización");
       progress = 100;
       imagesLoaded = imagesToPreload.length;
       finishLoading();
     }
-  }, 8000);
+  }, 5000); // ← CAMBIADO DE 8000 A 5000
 });
