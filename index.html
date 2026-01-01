@@ -15,44 +15,24 @@
 <!--============================ LOADING  =========================-->
 <!--============================          =========================-->
     <section class="loading-screen" id="loadingScreen">
-      <div class="loading-content">
-        <!-- Animación del creeper -->
-        <div class="creeper-animation">
+      <div class="creeper-head-container">
+        <!-- Cabeza del creeper animada -->
+        <div class="creeper-head" id="creeperHead">
           <div class="creeper-face">
-            <div class="creeper-eye left-eye"></div>
-            <div class="creeper-eye right-eye"></div>
-            <div class="creeper-mouth"></div>
-          </div>
-          <div class="creeper-body">
-            <div class="pixel pixel-1"></div>
-            <div class="pixel pixel-2"></div>
-            <div class="pixel pixel-3"></div>
-            <div class="pixel pixel-4"></div>
+            <!-- Píxeles se generan con JavaScript -->
           </div>
         </div>
         
-        <!-- Texto de carga -->
-        <div class="loading-text">
-          <h2 class="loading-title">Cargando proyectos especiales...</h2>
-          <p class="loading-subtitle">Preparando sorpresas con 💖</p>
+        <!-- Barra de carga minimalista -->
+        <div class="simple-progress">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text" id="progressText">0%</div>
         </div>
         
-        <!-- Barra de progreso -->
-        <div class="loading-bar-container">
-          <div class="loading-bar" id="loadingBar"></div>
-          <div class="loading-percentage" id="loadingPercentage">0%</div>
-        </div>
-        
-        <!-- Frases aleatorias -->
-        <div class="loading-quote">
-          <p id="loadingQuote">"El amor no se mira, se siente; y aún más fuerte, se lleva en el corazón."</p>
-        </div>
-        
-        <!-- Contador de proyectos -->
-        <div class="projects-counter">
-          <i class="fas fa-gift"></i>
-          <span id="projectsCount">Cargando <span class="count-number">12</span> proyectos especiales</span>
-        </div>
+        <!-- Mensaje sutil -->
+        <div class="loading-message" id="loadingMessage">Preparando sorpresas...</div>
       </div>
     </section>
 <!--============================         =========================-->
@@ -188,7 +168,7 @@
       <!--            -->
       <a class="grid-item" href="./Proyectos♥/carrusel-de-imágenes/index.html" l target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-2.png" alt="CARRUSEL DE IMÁGENES">
+          <img src="./assets/img/imagen-2.png" alt="CARRUSEL DE IMÁGENES" loading="lazy">
         </div>
         <div class="text-content">
           <h1>CARRUSEL DE IMÁGENES</h1>
@@ -200,7 +180,7 @@
       <!--            -->
       <a class="grid-item wide" href="./Proyectos♥/coleción-de-imágenes/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-3.png" alt="COLECCIÓN DE IMÁGENES" loading="lazy>
+          <img src="./assets/img/imagen-3.png" alt="COLECCIÓN DE IMÁGENES" loading="lazy">
         </div>
         <div class="text-content">
           <h1>COLECCIÓN DE IMÁGENES</h1>
@@ -212,7 +192,7 @@
       <!--            -->
       <a class="grid-item" href="./Proyectos♥/collage-de-imágenes/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-4.png" alt="COLLAGE INTERACTIVO" loading="lazy>
+          <img src="./assets/img/imagen-4.png" alt="COLLAGE INTERACTIVO" loading="lazy">
         </div>
         <div class="text-content">
           <h1>COLLAGE INTERACTIVO</h1>
@@ -224,7 +204,7 @@
       <!--            -->
       <a class="grid-item tall" href="./Proyectos♥/zoom-galaxia/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-5.png" alt="ZOOM DE GALAXIA">
+          <img src="./assets/img/imagen-5.png" alt="ZOOM DE GALAXIA" loading="lazy">
         </div>
         <div class="text-content">
           <h1>ZOOM DE GALAXIA</h1>
@@ -236,7 +216,7 @@
       <!--            -->
       <a class="grid-item tall wide" href="./Proyectos♥/galaxia-de-fotos/index.html"  target="_blank" >
         <div class="image-container">
-          <img src="./assets/img/imagen-6.png" alt="GALAXIA DE FOTOS" loading="lazy>
+          <img src="./assets/img/imagen-6.png" alt="GALAXIA DE FOTOS" loading="lazy">
         </div>
         <div class="text-content">
           <h1>GALAXIA DE FOTOS</h1>
@@ -248,7 +228,7 @@
       <!--            -->
       <a class="grid-item wide" href="./Proyectos♥/feliz-cumpleaños/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-7.png" alt="FELIZ CUMPLEAÑOS">
+          <img src="./assets/img/imagen-7.png" alt="FELIZ CUMPLEAÑOS" loading="lazy">
         </div>
         <div class="text-content">
           <h1>FELIZ CUMPLEAÑOS</h1>
@@ -260,7 +240,7 @@
       <!--            -->
       <a class="grid-item wide" href="./Proyectos♥/carta-para-dedicar/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-8.png" alt="CARTA DE AMOR" loading="lazy>
+          <img src="./assets/img/imagen-8.png" alt="CARTA DE AMOR" loading="lazy">
         </div>
         <div class="text-content">
           <h1>CARTA DE AMOR</h1>
@@ -272,7 +252,7 @@
       <!--            -->
       <a class="grid-item wide" href="./Proyectos♥/galxia-de-frases/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-9.png" alt="GLAXIA DE FRASES">
+          <img src="./assets/img/imagen-9.png" alt="GLAXIA DE FRASES" loading="lazy">
         </div>
         <div class="text-content">
           <h1>GLAXIA DE FRASES</h1>
@@ -284,7 +264,7 @@
       <!--            -->
       <a class="grid-item " href="./Proyectos♥/nuestro-tiempo-juntos/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-10.png" alt="NUESTRO TIEMPO JUNTOS" loading="lazy>
+          <img src="./assets/img/imagen-10.png" alt="NUESTRO TIEMPO JUNTOS" loading="lazy">
         </div>
         <div class="text-content">
           <h1>NUESTRO TIEMPO JUNTOS</h1>
@@ -296,7 +276,7 @@
       <!--            -->
       <a class="grid-item" href="./Proyectos♥/Popuesta◑﹏◐/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-11.png" alt="PROPUESTA" loading="lazy>
+          <img src="./assets/img/imagen-11.png" alt="PROPUESTA" loading="lazy">
         </div>
         <div class="text-content">
           <h1>PROPUESTA ♡</h1>
@@ -308,7 +288,7 @@
       <!--            -->
       <a class="grid-item" href="./Proyectos♥/corazón-negro/index.html" target="_blank">
         <div class="image-container">
-          <img src="./assets/img/imagen-12.png" alt="CORAZÓN NEGRO" loading="lazy>
+          <img src="./assets/img/imagen-12.png" alt="CORAZÓN NEGRO" loading="lazy">
         </div>
         <div class="text-content">
           <h1>CORAZÓN NEGRO</h1>
