@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     "Generando magia...",
     "Compilando emociones...",
     "Casi listo...",
-    "Listo para sorprender...",
-    "¡Iniciando la aventura!"
+    "Cargando proyectos...",
+    "¡DEDICA AMOR!"
   ];
   
   // Matriz 8x8 para la cara del creeper
