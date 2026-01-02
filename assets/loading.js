@@ -448,5 +448,5 @@ document.addEventListener('DOMContentLoaded', function() {
       imagesLoaded = imagesToPreload.length;
       finishLoading();
     }
-  }, 5000); // ← CAMBIADO DE 8000 A 5000
+  }, 500); // ← CAMBIADO DE 8000 A 5000
 });
