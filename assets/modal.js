@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   // ========== ELEMENTOS DEL DOM ==========
+  const skeletonLoading = document.getElementById('skeletonLoading');
   const openModalBtn = document.getElementById('openModalBtn');
   const closeModalBtn = document.getElementById('closeModalBtn');
   const modal = document.getElementById('downloadModal');
@@ -10,11 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const previewImage = document.getElementById('previewImage');
   const previewTitle = document.getElementById('previewTitle');
   const previewCounter = document.querySelector('.preview-counter');
-
-  // ========== PANTALLA DE CARGA ==========
-    const loaderWrapper = document.getElementById('loader-wrapper');
-    const videoContainer = document.getElementById('loader-container');
-    const iframe = document.querySelector('iframe');
   
   // ========== DATOS DE PROYECTOS ==========
   const projects = [
@@ -23,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
       title: 'RAMO DE TULIPANES ROSADOS',
       tags: ['Romántico', 'HTML/CSS', 'Responsive'],
       link: './Proyectos♥/ramo-de-tulipanes-rosados/index.html',
-      githubDownload: 'https://github.com/MarcoFlowod/tulipanes-rosados/archive/refs/heads/main.zip',
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
       status: 'completado'
     },
     {
@@ -31,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
       title: 'CARRUSEL DE IMÁGENES',
       tags: ['Interactivo', 'JavaScript', 'Responsive'],
       link: './Proyectos♥/carrusel-de-imágenes/index.html',
-      githubDownload: 'https://github.com/MarcoFlowod/carrusel/archive/refs/heads/main.zip',
+      githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
       status: 'completado'
     },
     {
@@ -115,14 +111,62 @@ document.addEventListener('DOMContentLoaded', function() {
       status: 'en-proceso'
     }
   ];
-      // Ocultar el loader inmediatamente si el iframe no se carga (ej. no hay internet)
-    setTimeout(() => {
-        loaderWrapper.classList.add('hidden');
-        videoContainer.style.display = 'block';
-    }, 2000); // Tiempo de espera en milisegundos
   
   let currentPreviewIndex = 0;
   let isModalOpen = false;
+  let imagesLoaded = 0;
+  const totalImages = projects.length;
+  
+  // ========== FUNCIONES DE CARGA ==========
+  
+  // Pre-cargar todas las imágenes
+  function preloadImages() {
+    console.log('Pre-cargando imágenes...');
+    
+    projects.forEach((project, index) => {
+      const img = new Image();
+      img.src = project.img;
+      img.onload = imageLoaded;
+      img.onerror = imageLoaded; // También contar errores como cargadas
+    });
+  }
+  
+  // Cuando una imagen se carga
+  function imageLoaded() {
+    imagesLoaded++;
+    const progress = Math.round((imagesLoaded / totalImages) * 100);
+    console.log(`Imágenes cargadas: ${imagesLoaded}/${totalImages} (${progress}%)`);
+    
+    // Cuando todas las imágenes estén cargadas
+    if (imagesLoaded >= totalImages) {
+      setTimeout(hideSkeleton, 500); // Pequeño delay para mejor UX
+    }
+  }
+  
+  // Ocultar skeleton loading
+  function hideSkeleton() {
+    if (skeletonLoading) {
+      skeletonLoading.classList.add('hidden');
+      console.log('Skeleton loading ocultado');
+      
+      // Eliminar del DOM después de la animación
+      setTimeout(() => {
+        if (skeletonLoading.parentNode) {
+          skeletonLoading.parentNode.removeChild(skeletonLoading);
+        }
+      }, 500);
+    }
+  }
+  
+  // Forzar ocultar skeleton después de tiempo máximo
+  function forceHideSkeleton() {
+    setTimeout(() => {
+      if (skeletonLoading && !skeletonLoading.classList.contains('hidden')) {
+        console.log('Forzando ocultar skeleton (timeout)');
+        hideSkeleton();
+      }
+    }, 5000); // 5 segundos máximo
+  }
   
   // ========== FUNCIONES PRINCIPALES ==========
   
@@ -311,5 +355,17 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // ========== INICIALIZACIÓN ==========
   
+  // Iniciar pre-carga de imágenes
+  preloadImages();
+  
+  // Forzar ocultar skeleton si algo falla
+  forceHideSkeleton();
+  
+  // Inicializar preview
   updatePreview();
+  
+  // Mostrar en consola cuando todo esté listo
+  window.addEventListener('load', function() {
+    console.log('Página completamente cargada');
+  });
 });
