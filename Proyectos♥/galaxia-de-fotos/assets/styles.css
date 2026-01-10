@@ -100,6 +100,7 @@ canvas {
 }
 }
 
+
 /* div de Start screen */
 #start-screen {
 	position: fixed;
@@ -116,35 +117,47 @@ canvas {
     z-index: 9999;           
 }
 
-
-#start-screen img{ 
-	width: 200px;
+#start-button img{ 
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+	width: 300px;
 	height: auto;
 	cursor: pointer; 
-    margin: 40px;
-	align-items: center;
 }
 
+.stars {
+    background-image: linear-gradient(#051327, #000);
+    inset: 0;
+    position: fixed;
+}
+.space {
+    --size: 2px;
+    --space-layer: 
+        4vw 50vh 0 #fff,
+        18vw 88vh 0 #fff,
+        73vw 14vh 0 #fff;
 
-#start-text {
-    background: linear-gradient(90deg, #00d4ff, #7b2ff7, #f107a3, #ff6b35, #00d4ff) !important;
-    background-size: 300% 300% !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    animation: gradientFlow 4s ease infinite !important;
-    filter: drop-shadow(0 0 30px rgba(0, 191, 255, 0.7)) !important;
-	font-size: 40px; 
-	text-align: center; 
-	text-shadow: 0 6px 30px rgba(0,0,0,0.6); 
-	cursor: pointer; 
+    width: var(--size);
+    height: var(--size);
+    background: white;
+    box-shadow: var(--space-layer);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.75;
 }
 
-@media (max-width: 720px) {
-	#start-text { font-size: 24px; }
+.space {
+    animation: move var(--duration) linear infinite;
 }
 
-
+@keyframes move {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100vh); }
+}
 
 /* Modal */
 #image-modal {

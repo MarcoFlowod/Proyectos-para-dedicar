@@ -1,312 +1,463 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- ========== META TAGS MEJORADOS ========== -->
+    <meta name="description" content="Portafolio de proyectos románticos y creativos desarrollados con HTML, CSS y JavaScript. Descarga proyectos listos para personalizar.">
+    <meta name="keywords" content="proyectos románticos, HTML, CSS, JavaScript, descargas, portafolio, desarrollo web, amor, regalos digitales">
+    <meta name="author" content="MarcoFlowod">
+    <meta name="theme-color" content="#0e0d0d">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Detalles Creeper - Proyectos Románticos Especiales">
+    <meta property="og:description" content="Colección de proyectos especiales para ocasiones únicas, listos para personalizar.">
+    <meta property="og:image" content="assets/img/imagen-1.png">
+    <meta property="og:url" content="https://tusitio.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Detalles Creeper - Proyectos Románticos">
+    <meta name="twitter:description" content="Proyectos especiales de HTML/CSS/JS para regalar">
+    
+    <!-- Preconexiones para mejor performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="assets/styles.css" as="style">
+    <link rel="preload" href="assets/img/imagen-1.png" as="image" type="image/png">
+    
+    <!-- CDN y recursos externos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Estilos locales -->
     <link rel="stylesheet" href="assets/styles.css" />
     <link rel="icon" href="assets/img/creeper.gif" type="image/x-icon">
-    <title>Detalles Creeper</title>
-  </head>
-  <body>
-<!--============================          =========================-->
-<!--============================ LOADING  =========================-->
-<!--============================          =========================-->
-    <section id="skeletonLoading" class="skeleton-loading">
-      <div class="skeleton-container">
-        <!-- Header skeleton -->
-        <div class="skeleton-header">
-          <div class="skeleton-logo"></div>
-          <div class="skeleton-icons">
-            <div class="skeleton-icon"></div>
-            <div class="skeleton-icon"></div>
-            <div class="skeleton-icon"></div>
-          </div>
+    <title>Detalles Creeper - Proyectos Románticos Especiales</title>
+</head>
+<body>
+    <!-- ========== SKELETON LOADING ========== -->
+    <section id="skeletonLoading" class="skeleton-loading" role="alert" aria-live="polite" aria-label="Cargando contenido">
+        <div class="skeleton-container">
+            <!-- Header skeleton -->
+            <div class="skeleton-header">
+                <div class="skeleton-logo" aria-hidden="true"></div>
+                <div class="skeleton-icons" aria-hidden="true">
+                    <div class="skeleton-icon"></div>
+                    <div class="skeleton-icon"></div>
+                    <div class="skeleton-icon"></div>
+                </div>
+            </div>
+            
+            <!-- Grid skeleton -->
+            <div class="skeleton-grid" aria-hidden="true">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card wide"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card tall"></div>
+                <div class="skeleton-card tall wide"></div>
+                <div class="skeleton-card wide"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card wide"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
         </div>
-        
-        <!-- Grid skeleton -->
-        <div class="skeleton-grid">
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card wide"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card tall"></div>
-          <div class="skeleton-card tall wide"></div>
-          <div class="skeleton-card wide"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card wide"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-        </div>
-      </div>
-    </section>
-<!--============================         =========================-->
-<!--============================ HEADER  =========================-->
-<!--============================         =========================-->
-    <section class="header">
-      <a class="header-icon" href=""><img src="assets/img/icon.png" alt=""></a>
-      <div class="header-redes">
-        <a class="header-txt" href="https://github.com/MarcoFlowod/Proyectos-para-dedicar" target="_blank">
-          <i class="fa-brands fa-github"></i>
-          <h2>Github</h2>
-        </a>
-        <a class="header-txt" href="https://wa.link/2qznod" target="_blank">
-          <i class="fa-brands fa-whatsapp"></i>
-          <h2>Whatsapp</h2>
-        </a>
-        <a class="header-txt" id="openModalBtn" href="#" onclick="event.preventDefault()">
-          <i class="fa-solid fa-download"></i>
-          <h2>Descargas</h2>
-        </a>
-      </div>
     </section>
 
-<!--============================                      =========================-->
-<!--============================  MODAL DE DESCARGAS  =========================-->
-<!--============================                      =========================-->
-    <div id="downloadModal" class="modal">
-      <div class="modal-container">
-        <div class="modal-header">
-          <h2 class="modal-title">🎁 Descargar Proyectos</h2>
-          <button id="closeModalBtn" class="modal-close-btn" aria-label="Cerrar modal">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
+    <!-- ========== HEADER ========== -->
+    <header class="header" role="banner">
+        <a class="header-icon" href="#" aria-label="Inicio - Volver al portafolio principal">
+            <img src="assets/img/icon.png" alt="Logo Detalles Creeper - Portafolio de proyectos románticos" width="150" height="40">
+        </a>
         
-        <div class="modal-content">
-          <div class="modal-info">
-            <div class="modal-icon">
-              <i class="fas fa-gift"></i>
-            </div>
-            <h3>¡Proyectos Especiales para Ti!</h3>
-            <p class="modal-description">
-              Aquí puedes descargar todos los proyectos que se han creado con amor y dedicación. 
-              Cada uno es único y especial, listo para personalizar según tus necesidades.
-            </p>
+        <nav class="header-redes" role="navigation" aria-label="Enlaces de contacto y descargas">
             
-            <div class="projects-list">
-              <div class="project-item">
-                <i class="fas fa-heart"></i>
-                <div class="project-info">
-                  <h4>Proyectos Románticos</h4>
-                  <p>Cartas, galerías y sorpresas especiales.</p>
-                </div>
-              </div>
-              
-              <div class="project-item">
-                <i class="fas fa-images"></i>
-                <div class="project-info">
-                  <h4>Galerías Interactivas</h4>
-                  <p>Carruseles, collages y efectos visuales.</p>
-                </div>
-              </div>
-              
-              <div class="project-item">
-                <i class="fas fa-magic"></i>
-                <div class="project-info">
-                  <h4>Efectos Especiales</h4>
-                  <p>Animaciones, zooms y transiciones.</p>
-                </div>
-              </div>
+            <a class="header-txt" href="https://wa.link/2qznod" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-label="Contactar por WhatsApp (se abre en nueva ventana)">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                <span class="header-label">Whatsapp</span>
+            </a>
+            
+            <a class="header-txt" id="openModalBtn" href="#" 
+               onclick="event.preventDefault()"
+               aria-label="Abrir modal de descargas"
+               aria-haspopup="dialog">
+                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                <span class="header-label">Descargas</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- ========== MODAL DE DESCARGAS MEJORADO ========== -->
+    <div id="downloadModal" class="modal" role="dialog" aria-modal="true" 
+         aria-labelledby="modal-title" aria-describedby="modal-description" hidden>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-title">🎁 Descargar Proyectos</h2>
+                <button id="closeModalBtn" class="modal-close-btn" aria-label="Cerrar modal de descargas">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
             </div>
             
-            <div class="download-options">
-              <a href="https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip" download="proyectos-especiales.zip" class="download-all-btn">
-                <i class="fas fa-download"></i> Descargar Todos
-              </a>
-            </div>
-            
-            <div class="modal-footer">
-              <p><small>📦 Todos los proyectos incluyen: HTML, CSS, JavaScript e imágenes.</small></p>
-              <p><small>💖 Hecho con mucho cariño para ocasiones especiales.</small></p>
-            </div>
-          </div>
-          
-          <div class="modal-preview">
-            <div class="preview-container">
-              <img id="previewImage" src="./assets/img/imagen-1.png" title="Ver proyecto" alt="Vista previa de proyecto">
-              <div class="preview-info">
-                <h4 id="previewTitle">RAMO DE TULIPANES ROSADOS</h4>
-                <a href="https://github.com/MarcoFlowod/Proyectos-para-dedicar" download="proyectos-especiales.zip" class="preview-link">
-                  <i class="fas fa-download"></i> Descargar
-                </a>
-                <div class="preview-tags">
-                  <span class="tag">Romántico</span>
-                  <span class="tag">HTML/CSS</span>
-                  <span class="tag">Responsive</span>
+            <div class="modal-content">
+                <div class="modal-info">
+                    <div class="modal-icon" aria-hidden="true">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>¡Proyectos Especiales para Ti!</h3>
+                    <p id="modal-description" class="modal-description">
+                        Aquí puedes descargar todos los proyectos que se han creado con amor y dedicación. 
+                        Cada uno es único y especial, listo para personalizar según tus necesidades.
+                    </p>
+                    
+                    <div class="projects-list">
+                        <div class="project-item">
+                            <i class="fas fa-heart" aria-hidden="true"></i>
+                            <div class="project-info">
+                                <h4>Proyectos Románticos</h4>
+                                <p>Cartas, galerías y sorpresas especiales.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="project-item">
+                            <i class="fas fa-images" aria-hidden="true"></i>
+                            <div class="project-info">
+                                <h4>Galerías Interactivas</h4>
+                                <p>Carruseles, collages y efectos visuales.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="project-item">
+                            <i class="fas fa-magic" aria-hidden="true"></i>
+                            <div class="project-info">
+                                <h4>Efectos Especiales</h4>
+                                <p>Animaciones, zooms y transiciones.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-options">
+                        <a href="https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip" 
+                           download="proyectos-especiales.zip" 
+                           class="download-all-btn"
+                           aria-label="Descargar todos los proyectos como archivo ZIP">
+                            <i class="fas fa-download" aria-hidden="true"></i> Descargar Todos
+                        </a>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <p><small>📦 Todos los proyectos incluyen: HTML, CSS, JavaScript e imágenes.</small></p>
+                        <p><small>💖 Hecho con mucho cariño para ocasiones especiales.</small></p>
+                    </div>
                 </div>
-              </div>
+                
+                <div class="modal-preview">
+                    <div class="preview-container">
+                        <img id="previewImage" src="./assets/img/imagen-1.png" 
+                             alt="Vista previa del proyecto actual" 
+                             width="400" height="300"
+                             loading="eager">
+                        <div class="preview-info">
+                            <h4 id="previewTitle">RAMO DE TULIPANES ROSADOS</h4>
+                            <a href="#" class="preview-link descargable" id="previewDownloadBtn"
+                               aria-label="Descargar proyecto actual">
+                                <i class="fas fa-download" aria-hidden="true"></i> Descargar
+                            </a>
+                            <div class="preview-tags" id="previewTags">
+                                <span class="tag">Romántico</span>
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">Responsive</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-controls">
+                        <button class="preview-btn" id="prevPreview" aria-label="Ver proyecto anterior">
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <span class="preview-counter" id="previewCounter" aria-live="polite">1/12</span>
+                        <button class="preview-btn" id="nextPreview" aria-label="Ver proyecto siguiente">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-            
-            <div class="preview-controls">
-              <button class="preview-btn" id="prevPreview">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <span class="preview-counter">1/12</span>
-              <button class="preview-btn" id="nextPreview">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
 
-<!--============================            =========================-->
-<!--============================ PROYECTOS  =========================-->
-<!--============================            =========================-->
-    <main class="proyectos-container" id="proyectos-container">
-      <!--            -->
-      <!-- proyecto 1 -->
-      <!--            -->
-      <a class="grid-item" href="./Proyectos♥/ramo-de-tulipanes-rosados/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-1.png" alt="RAMO DE TULIPANES ROSADOS" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>RAMO DE TULIPANES ROSADOS</h1>
-          <p>Proyecto terminado, listo para personalizar.</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 2 -->
-      <!--            -->
-      <a class="grid-item" href="./Proyectos♥/carrusel-de-imágenes/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-2.png" alt="CARRUSEL DE IMÁGENES" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>CARRUSEL DE IMÁGENES</h1>
-          <p>Proyecto terminado, listo para personalizar</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 3 -->
-      <!--            -->
-      <a class="grid-item wide" href="./Proyectos♥/coleción-de-imágenes/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-3.png" alt="COLECCIÓN DE IMÁGENES" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>COLECCIÓN DE IMÁGENES</h1>
-          <p>Cliquear en "te quiero" para visualizar colección. A continuación, cliquear en una imagen para ampliarla y con otro clic la imagen hace flip para mostrar el texto.</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 4 -->
-      <!--            -->
-      <a class="grid-item" href="./Proyectos♥/collage-de-imágenes/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-4.png" alt="COLLAGE INTERACTIVO" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>COLLAGE INTERACTIVO</h1>
-          <p>Poyecto en proceso, no se que le falta pero falta algo :)</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 5 -->
-      <!--            -->
-      <a class="grid-item tall" href="./Proyectos♥/zoom-galaxia/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-5.png" alt="ZOOM DE GALAXIA" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>ZOOM DE GALAXIA</h1>
-          <p>Poyecto en proceso, no sé que falta</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 6 -->
-      <!--            -->
-      <a class="grid-item tall wide" href="./Proyectos♥/galaxia-de-fotos/index.html"  target="_blank" >
-        <div class="image-container">
-          <img src="./assets/img/imagen-6.png" alt="GALAXIA DE FOTOS" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>GALAXIA DE FOTOS</h1>
-          <p>Poyecto en proceso, falta hacer zoom en h1</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 7 -->
-      <!--            -->
-      <a class="grid-item wide" href="./Proyectos♥/feliz-cumpleaños/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-7.png" alt="FELIZ CUMPLEAÑOS" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>FELIZ CUMPLEAÑOS</h1>
-          <p>Proyecto terminado, listo para personalizar</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 8 -->
-      <!--            -->
-      <a class="grid-item wide" href="./Proyectos♥/carta-para-dedicar/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-8.png" alt="CARTA DE AMOR" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>CARTA DE AMOR</h1>
-          <p>Proyecto terminado, listo para personalizar</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 9 -->
-      <!--            -->
-      <a class="grid-item wide" href="./Proyectos♥/galxia-de-frases/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-9.png" alt="GLAXIA DE FRASES" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>GLAXIA DE FRASES</h1>
-          <p>Proyecto terminado, listo para personalizar</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 10 -->
-      <!--            -->
-      <a class="grid-item " href="./Proyectos♥/nuestro-tiempo-juntos/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-10.png" alt="NUESTRO TIEMPO JUNTOS" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>NUESTRO TIEMPO JUNTOS</h1>
-          <p>Proyecto terminado, listo para personalizar</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 11 -->
-      <!--            -->
-      <a class="grid-item" href="./Proyectos♥/Popuesta◑﹏◐/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-11.png" alt="PROPUESTA" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>PROPUESTA ♡</h1>
-          <p>Proyecto terminado, listo para personalizar</p>
-        </div>
-      </a>
-      <!--            -->
-      <!-- proyecto 12 -->
-      <!--            -->
-      <a class="grid-item" href="./Proyectos♥/corazón-negro/index.html" target="_blank">
-        <div class="image-container">
-          <img src="./assets/img/imagen-12.png" alt="CORAZÓN NEGRO" loading="lazy">
-        </div>
-        <div class="text-content">
-          <h1>CORAZÓN NEGRO</h1>
-          <p>Proyecto en proceso, falta responsive</p>
-        </div>
-      </a>
-      
+    <!-- ========== PROYECTOS MEJORADOS ========== -->
+    <main id="main-content" class="proyectos-container" role="main" aria-label="Galería de proyectos">
+        <!-- Proyecto 1 -->
+        <article class="grid-item" role="article" aria-labelledby="proyecto1-title">
+            <a href="./Proyectos♥/ramo-de-tulipanes-rosados/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto1-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-1.png" 
+                         alt="Ramo de tulipanes rosados interactivo con animaciones CSS" 
+                         loading="lazy"
+                         width="400" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto1-title">RAMO DE TULIPANES ROSADOS</h1>
+                    <p id="proyecto1-desc">Proyecto terminado, listo para personalizar.</p>
+                    <span class="sr-only">Abrir proyecto en nueva pestaña</span>
+                </div>
+            </a>
+        </article>
+
+        <!-- Proyecto 2 -->
+        <article class="grid-item" role="article" aria-labelledby="proyecto2-title">
+            <a href="./Proyectos♥/carrusel-de-imágenes/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto2-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-2.png" 
+                         alt="Carrusel de imágenes responsivo con controles táctiles" 
+                         loading="lazy"
+                         width="400" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto2-title">CARRUSEL DE IMÁGENES</h1>
+                    <p id="proyecto2-desc">Proyecto terminado, listo para personalizar</p>
+                </div>
+            </a>
+        </article>
+
+        <!-- Proyecto 3 -->
+        <article class="grid-item wide" role="article" aria-labelledby="proyecto3-title">
+            <a href="./Proyectos♥/coleción-de-imágenes/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto3-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-3.png" 
+                         alt="Colección de imágenes con efecto flip y zoom interactivo" 
+                         loading="lazy"
+                         width="800" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto3-title">COLECCIÓN DE IMÁGENES</h1>
+                    <p id="proyecto3-desc">Click en "te quiero" para visualizar colección. Click en imagen para ampliar y hacer flip para mostrar texto.</p>
+                </div>
+            </a>
+        </article>
+        <!-- Proyecto 4 -->
+        <article class="grid-item" role="article" aria-labelledby="proyecto4-title">
+            <a href="./Proyectos♥/collage-de-imágenes/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto4-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-4.png" 
+                         alt="COLLAGE INTERACTIVO DE IMÁGENES CON EFECTOS VISUALES" 
+                         loading="lazy"
+                         width="400" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto4-title">COLECCIÓN DE IMÁGENES</h1>
+                    <p id="proyecto4-desc">...</p>
+                </div>
+            </a>
+        </article>
+        <!-- Proyecto 5 -->
+        <article class="grid-item tall" role="article" aria-labelledby="proyecto5-title">
+            <a href="./Proyectos♥/zoom-galaxia/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto5-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-5.png" 
+                         alt="Colección de imágenes con efecto flip y zoom interactivo" 
+                         loading="lazy"
+                         width="400" height="600">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto5-title">ZOOM DE GALAXIA</h1>
+                    <p id="proyecto5-desc">Click en "te quiero" para visualizar colección. Click en imagen para ampliar y hacer flip para mostrar texto.</p>
+                </div>
+            </a>
+        </article>
+        <!-- Proyecto 6 -->
+        <article class="grid-item tall wide" role="article" aria-labelledby="proyecto6-title">
+            <a href="./Proyectos♥/galaxia-de-fotos/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto6-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-6.png" 
+                         alt="Galacia de fotos interactiva con efectos visuales" 
+                         loading="lazy"
+                         width="800" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto6-title">GALAXIA DE FOTOS</h1>
+                    <p id="proyecto6-desc">...</p>
+                </div>
+            </a>
+        </article>
+        <!-- Proyecto 7 -->
+        <article class="grid-item wide" role="article" aria-labelledby="proyecto7-title">
+            <a href="./Proyectos♥/feliz-cumpleaños/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto7-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-7.png" 
+                         alt="Feliz cumpleaños animado con efectos visuales" 
+                         loading="lazy"
+                         width="800" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto7-title">FELIZ CUMPLEAÑOS</h1>
+                    <p id="proyecto7-desc">...</p>
+                </div>
+            </a>
+        </article>
+        <!-- Proyecto 8 -->
+        <article class="grid-item wide" role="article" aria-labelledby="proyecto8-title">
+            <a href="./Proyectos♥/carta-para-dedicar/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto8-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-8.png" 
+                         alt="Carta para dedicar con animaciones y efectos visuales" 
+                         loading="lazy"
+                         width="800" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto8-title">CARTA DE AMOR</h1>
+                    <p id="proyecto8-desc">...</p>
+                </div>
+            </a>
+        </article>
+        <!-- Proyecto 9 -->
+        <article class="grid-item wide" role="article" aria-labelledby="proyecto9-title">
+            <a href="./Proyectos♥/galxia-de-frases/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto9-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-9.png" 
+                         alt="Galaxia de frases interactivas con efectos visuales" 
+                         loading="lazy"
+                         width="800" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto9-title">COLECCIÓN DE IMÁGENES</h1>
+                    <p id="proyecto9-desc">Click en "te quiero" para visualizar colección. Click en imagen para ampliar y hacer flip para mostrar texto.</p>
+                </div>
+            </a>
+        </article>
+        <!-- Proyecto 10 -->
+        <article class="grid-item" role="article" aria-labelledby="proyecto10-title">
+            <a href="./Proyectos♥/nuestro-tiempo-juntos/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto10-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-10.png" 
+                         alt="nuestro tiempo juntos con efectos visuales" 
+                         loading="lazy"
+                         width="800" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto10-title">NUESTRO TIEMPO JUNTOS</h1>
+                    <p id="proyecto10-desc">...</p>
+                </div>
+            </a>
+        </article>
+        <!-- Proyecto 11 -->
+        <article class="grid-item" role="article" aria-labelledby="proyecto11-title">
+            <a href="./Proyectos♥/Popuesta◑﹏◐/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto11-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-11.png" 
+                         alt="Propuesta animada con efectos visuales" 
+                         loading="lazy"
+                         width="800" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto11-title">PROPUESTA ♡</h1></h1>
+                    <p id="proyecto11-desc">...p>
+                </div>
+            </a>
+        </article>       
+
+        <!-- Proyecto 12 -->
+        <article class="grid-item" role="article" aria-labelledby="proyecto12-title">
+            <a href="./Proyectos♥/corazón-negro/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-describedby="proyecto12-desc">
+                <div class="image-container">
+                    <img src="./assets/img/imagen-12.png" 
+                         alt="Corazón negro animado con efectos de partículas" 
+                         loading="lazy"
+                         width="400" height="300">
+                </div>
+                <div class="text-content">
+                    <h1 id="proyecto12-title">CORAZÓN NEGRO</h1>
+                    <p id="proyecto12-desc">Proyecto en proceso, falta responsive</p>
+                </div>
+            </a>
+        </article>
     </main>
 
-    <script src="assets/modal.js"></script>
-    <script src="assets/loading.js"></script>
-  </body>
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <p>Hecho con <span aria-label="amor">❤️</span> por 
+                <a href="https://github.com/MarcoFlowod" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Visitar perfil de MarcoFlowod en GitHub">
+                    MarcoFlowod
+                </a>
+            </p>
+            <p class="footer-sub">Proyectos especiales para momentos especiales</p>
+            <p class="footer-credits">
+                <small>© 2026 Detalles Creeper. Todos los proyectos son de código abierto.</small>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ========== REGIÓN ARIA LIVE (para anuncios) ========== -->
+    <div id="aria-live-updates" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="assets/modal.js" defer></script>
+    
+    <!-- Structured Data para SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CreativeWorkSeries",
+        "name": "Detalles Creeper - Proyectos Románticos",
+        "description": "Colección de proyectos web románticos desarrollados con HTML, CSS y JavaScript",
+        "author": {
+            "@type": "Person",
+            "name": "MarcoFlowod"
+        },
+        "url": "https://tusitio.com",
+        "datePublished": "2024-01-01",
+        "genre": ["Web Development", "Romantic", "Digital Gifts"]
+    }
+    </script>
+</body>
 </html>
