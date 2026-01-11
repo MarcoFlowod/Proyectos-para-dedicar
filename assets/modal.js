@@ -611,6 +611,18 @@ function setupEventListeners() {
     if (elements.nextPreview) {
         elements.nextPreview.addEventListener('click', () => navigateToProject(1));
     }
+
+    // Handler específico para los botones "Dedicar": evitar que el click herede el enlace del padre y mostrar mensaje
+    //MANTENER ASÍ POR AHORA HASTA TENER LA FUNCIONALIDAD LISTA
+    document.querySelectorAll('.btn-dedicar').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            alert('La personalización de los proyectos aún está en desarrollo. Pronto podrás personalizar y crear tu propia página para compartirla con tu persona favorita.');
+            announceToScreenReader('Personalización de proyectos en desarrollo');
+            trackEvent('dedicar_click', { projectId: btn.dataset.projectId || null });
+        }, { passive: false });
+    });
     
     debugLog('Event listeners configurados');
 }
@@ -632,7 +644,7 @@ function handleDocumentClick(event) {
         closeModal();
         return;
     }
-}
+} 
 
 /**
  * Maneja navegación por teclado
