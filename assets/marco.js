@@ -315,7 +315,7 @@ function hideSkeleton() {
                 elements.skeletonLoading.parentNode.removeChild(elements.skeletonLoading);
                 debugLog('Skeleton eliminado del DOM');
             }
-        }, 500);
+        }, 500); //tiempo máximo para poder ocultar el skeleton
     }
 }
 
