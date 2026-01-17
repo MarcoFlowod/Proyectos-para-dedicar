@@ -65,12 +65,12 @@ function iniciarAnimacionYMusica() {
     
     // Imágenes flotantes
     const imgUrls = [
-        "../imagenes/img1.jpeg",
-        "../imagenes/img2.jpeg",
-        "../imagenes/img3.jpeg",
-        "../imagenes/img4.jpeg",
-        "../imagenes/img5.jpeg",
-        "../imagenes/img6.jpeg",
+        "../imagenes/img1.webp",
+        "../imagenes/img2.webp",
+        "../imagenes/img3.webp",
+        "../imagenes/img4.webp",
+        "../imagenes/img5.webp",
+        "../imagenes/img6.webp",
     ];
     
     const imgObjs = imgUrls.map(url => {

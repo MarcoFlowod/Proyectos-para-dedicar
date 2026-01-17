@@ -1121,7 +1121,12 @@ button:focus {
         min-height: 32px;
         min-width: 32px;
     }
-    
+    .btn-ver i {
+        color: var(--color-primary-dark)
+    }
+    .btn-dedicar i {
+        color: var(--color-error)
+    }
     .btn-text {
         opacity: 1 !important;
         width: auto !important;
