@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te quiero♥</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>
+<body>
+    <canvas id="loveRain"></canvas>
+    <div class="galaxy-overlay"></div>
+    
+    <!-- Flores flotantes decorativas -->
+    <div class="floating-flowers">
+        <div class="flower" style="--delay: 0s; --duration: 8s">🌷</div>
+        <div class="flower" style="--delay: 1s; --duration: 10s">🌹</div>
+        <div class="flower" style="--delay: 2s; --duration: 9s">🌷</div>
+        <div class="flower" style="--delay: 3s; --duration: 11s">🌹</div>
+        <div class="flower" style="--delay: 4s; --duration: 8.5s">🌷</div>
+    </div>
+
+    <!-- Sobre interactivo -->
+    <div class="valentines-day" id="envelope-container">
+        <div class="envelope"></div>
+        <div class="heart"></div>
+        <div class="text">¡ABRE AQUÍ! </div>
+        <div class="front"></div>
+        <div class="glow-effect"></div>
+    </div>
+
+    <!-- Tarjeta con mensaje -->
+    <div id="card" class="card-container">
+        <div class="card-inner">
+            <div class="side one">
+                <div class="image-container">
+                    <img id="img-heart" src="https://i.pinimg.com/736x/36/67/04/366704b82a3ec6c0dcac512bd3a763c5.jpg" alt="amor">
+                    <div class="image-glow"></div>
+                </div>
+                <div class="floating-heart">💖</div>
+            </div>
+            <div class="side two">
+                <h2>✨ ¡Feliz Día, Amor! ✨</h2>
+                <div class="heart-separator">❤️ ❤️ ❤️</div>
+                <p>Hola hermosa,</p>
+                <p>
+                    Quiero desearte un día lleno de alegría y buenos momentos. Gracias por ser parte de mi vida
+                    y por compartir tantas experiencias especiales que hacen mi vida más bonita.
+                </p>
+                <p>
+                    Espero que este día esté lleno de sonrisas, abrazos y momentos inolvidables que recordaremos para siempre.
+                </p>
+                <div class="signature">
+                    <p>Con todo mi amor,<br>
+                    <span class="sender">Tu persona especial 💕</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instrucción interactiva -->
+    <div class="instruction" id="instruction">← Haz clic en el sobre →</div>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
