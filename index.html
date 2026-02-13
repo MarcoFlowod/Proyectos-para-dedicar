@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <meta name="description" content="Portafolio de proyectos románticos y creativos desarrollados con HTML, CSS y JavaScript. Descarga proyectos listos para personalizar.">
+    <meta name="keywords" content="proyectos románticos, HTML, CSS, JavaScript, descargas, amor, regalos digitales">
+    <meta name="author" content="MarcoFlowod">
+    <meta name="theme-color" content="#0e0d0d">
+   
+    <meta property="og:title" content="Detalles Creeper - Proyectos Románticos Especiales">
+    <meta property="og:description" content="Colección de proyectos especiales para ocasiones únicas, listos para personalizar.">
+    <meta property="og:image" content="assets/img/imagen-1.png">
+    <meta property="og:url" content="https://tusitio.com">
+    <meta property="og:type" content="website">
+   
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Detalles Creeper - Proyectos Románticos">
+    <meta name="twitter:description" content="Proyectos especiales de HTML/CSS/JS para regalar">
+   
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   
+    <link rel="preload" href="assets/styles.css" as="style">
+    <link rel="preload" href="assets/img/imagen-1.png" as="image" type="image/png">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    <link rel="stylesheet" href="./CSS/styles.css" />
+    <link rel="icon" href="assets/img/creeper.gif" type="image/x-icon">
+    <title>Detalles Creeper - Proyectos Románticos Especiales</title>
+</head>
+<body>
+    <section id="skeletonLoading" class="skeleton-loading" role="alert" aria-live="polite" aria-label="Cargando contenido">
+        <div class="skeleton-container">
+            <div class="skeleton-header">
+                <div class="skeleton-logo" aria-hidden="true"></div>
+                <div class="skeleton-icons" aria-hidden="true">
+                    <div class="skeleton-icon"></div>
+                    <div class="skeleton-icon"></div>
+                </div>
+            </div>
+            <div class="skeleton-grid" aria-hidden="true"></div>
+        </div>
+    </section>
+
+    <header class="header" role="banner">
+        <a class="header-icon" href="#" aria-label="Inicio - Volver al portafolio principal">
+            <img src="assets/img/icon.png" alt="Logo Detalles Creeper" width="150" height="40">
+        </a>
+       
+        <nav class="header-redes" role="navigation" aria-label="Enlaces de contacto y descargas">
+            <a class="header-txt" href="https://wa.link/2qznod" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                <span class="header-label">Whatsapp</span>
+            </a>
+           
+            <a class="header-txt" id="openModalBtn" href="#" onclick="event.preventDefault()" aria-label="Descargas" aria-haspopup="dialog">
+                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                <span class="header-label">Descargas</span>
+            </a>
+        </nav>
+    </header>
+
+    <div class="proyectos-container"></div>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <p>Hecho con <span aria-label="amor">❤️</span> por <a href="https://github.com/MarcoFlowod" target="_blank" rel="noopener noreferrer">MarcoFlowod</a></p>
+            <p class="footer-sub">Proyectos especiales para momentos especiales</p>
+            <p class="footer-credits"> <small>© 2026 Detalles Creeper. Todos los proyectos son de código abierto. </small></p>
+        </div>
+    </footer>
+
+    <div id="downloadModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" hidden>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-title">🎁 Descargar Proyectos</h2>
+                <button id="closeModalBtn" class="modal-close-btn" aria-label="Cerrar modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+           
+            <div class="modal-content">
+                <div class="modal-info">
+                    <div class="modal-icon" aria-hidden="true"><i class="fas fa-gift"></i></div>
+                    <h3>¡Proyectos Especiales para Ti!</h3>
+                    <p id="modal-description" class="modal-description">
+                        Aquí puedes descargar todos los proyectos creados con amor. Listos para personalizar.
+                    </p>
+                   
+                    <div class="projects-list">
+                        <div class="project-item">
+                            <i class="fas fa-heart" aria-hidden="true"></i>
+                            <div class="project-info"><h4>Proyectos Románticos</h4><p>Cartas y sorpresas especiales.</p></div>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-images" aria-hidden="true"></i>
+                            <div class="project-info"><h4>Galerías Interactivas</h4><p>Efectos visuales y collages.</p></div>
+                        </div>
+                    </div>
+                   
+                    <div class="download-options">
+                        <a href="https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip"
+                           class="download-all-btn" aria-label="Descargar todos">
+                            <i class="fas fa-download" aria-hidden="true"></i> Descargar Todos
+                        </a>
+                    </div>
+
+                </div>
+               
+                <div class="modal-preview">
+                    <div class="preview-container">
+                        <img id="previewImage" src="./assets/img/imagen-1.png" alt="Vista previa" width="400" height="300">
+                        <div class="preview-info">
+                            <h4 id="previewTitle">RAMO DE TULIPANES ROSADOS</h4>
+                            
+                            <span class="preview-link descargable" 
+                                  id="previewDownloadBtn" 
+                                  role="button" 
+                                  style="cursor: pointer;"
+                                  aria-label="Descargar proyecto actual">
+                                <i class="fas fa-download" aria-hidden="true"></i> Descargar
+                            </span>
+
+                            <div class="preview-tags" id="previewTags">
+                                </div>
+                        </div>
+                    </div>
+                   
+                    <div class="preview-controls">
+                        <button class="preview-btn" id="prevPreview" aria-label="Anterior">
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <span class="preview-counter" id="previewCounter">1/12</span>
+                        <button class="preview-btn" id="nextPreview" aria-label="Siguiente">
+                            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="aria-live-updates" class="sr-only" aria-live="polite"></div>
+
+    <script src="./JS/proyectos.js"></script>
+    <script src="./JS/descargar.js" defer></script>
+</body>
+</html>
