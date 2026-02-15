@@ -324,12 +324,13 @@ button:focus {
 }
 
 .grid-item {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
     cursor: pointer;
     background-color: var(--color-bg-card);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     text-decoration: none;
     color: inherit;
@@ -346,6 +347,16 @@ button:focus {
 .grid-item:focus-visible {
     outline: 3px solid var(--color-border-focus);
     outline-offset: 3px;
+}
+
+
+
+/* El enlace que envuelve imagen y texto */
+.proyecto-link-wrapper {
+    text-decoration: none;
+    display: block;
+    color: inherit;
+    flex-grow: 1; /* Ocupa el espacio disponible */
 }
 
 .image-container {
@@ -404,19 +415,12 @@ button:focus {
     height: 100%;
     z-index: 2;
     padding: var(--space-sm) var(--space-md);
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.8) 0%,
-        rgba(0, 0, 0, 0.4) 50%,
-        rgba(0, 0, 0, 0) 100%
-    );
 }
 
 .text-content h1 {
     color: var(--color-text);
     font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: var(--space-sm);
     text-align: center;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     line-height: 1.2;
@@ -433,13 +437,21 @@ button:focus {
 }
 
 .btn-icons {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: var(--space-xs);
-    margin-top: var(--space-xs);
+    padding: var(--space-xs);
     width: 100%;
+    z-index: 10;
+        background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0) 100%
+    );
 }
 
 .btn-ver, .btn-dedicar {
@@ -456,7 +468,6 @@ button:focus {
     padding: 10px;
     border: 2px solid rgba(255,255,255,0.04);
     border-radius: var(--radius-lg);
-    cursor: pointer;
     white-space: nowrap;
     background-color: rgba(255,255,255,0.02);
     color: var(--color-text-light);
@@ -464,6 +475,8 @@ button:focus {
     backdrop-filter: blur(4px);
     overflow: hidden;
     transition: all var(--transition-normal);
+    z-index: 11;
+    cursor: pointer;
 }
 
 .btn-ver:focus-visible,
@@ -1086,6 +1099,16 @@ button:focus {
         padding: var(--space-sm);
     }
     
+    .header-label {
+        display: none !important;
+    }
+
+    .header-txt:hover,
+    .header-txt:focus-visible {
+        width: 40px;
+        border-color: var(--color-border);
+        background-color: var(--color-bg-light);
+    }
     .header-icon {
         width: 120px;
     }
@@ -1103,15 +1126,18 @@ button:focus {
         min-height: 180px;
     }
     
+    .text-content {
+        padding: 3px 10px;
+    }
+
     .text-content h1 {
         font-size: 1rem;
         opacity: 1;
         transform: translateY(0);
     }
     
-    .text-content {
-        padding: 10px 15px;
-    }
+    
+
     
     /* Botones en móvil - siempre expandidos */
     .btn-ver, .btn-dedicar {

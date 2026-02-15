@@ -107,7 +107,7 @@ function loadProjectsData() {
         title: 'CARTA DE AMOR',
         tags: ['Romántico', 'Carta'],
         link: './Proyectos♥/carta-para-dedicar/index.html',
-        githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+        githubDownload: '',
         status: 'en-proceso'
       },
       {
@@ -115,7 +115,7 @@ function loadProjectsData() {
         title: 'GALAXIA DE FRASES',
         tags: ['En Proceso',/* 'Frases', 'Inspirador' */],
         link: './Proyectos♥/galxia-de-frases/index.html',
-        githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+        githubDownload: '',
         status: 'en-proceso'
       },
       {
@@ -123,7 +123,7 @@ function loadProjectsData() {
         title: 'NUESTRO TIEMPO JUNTOS',
         tags: ['En Proceso',/* 'Romántico', 'Memorias' */],
         link: './Proyectos♥/nuestro-tiempo-juntos/index.html',
-        githubDownload: 'https://github.com/MarcoFlowod/Proyectos-para-dedicar/archive/refs/heads/main.zip',
+        githubDownload: '',
         status: 'en-proceso'
       }
     ];

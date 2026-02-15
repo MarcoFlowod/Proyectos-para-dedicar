@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links-->
+    <script type="importmap">
+        { "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <link href="./css/galaxia-de-fotos.css" rel="stylesheet">
+    <title id="dinamic-title">Cargando tu Galaxia...</title>
+
+</head>
+<body>
+
+    <div id="start-screen">
+        <div id="start-button">
+            <img src="../imagenes/corazón latente.gif"  inciar>
+        </div>
+        <div class="stars">
+            <div class="space space-1"></div>
+            <div class="space space-2"></div>
+            <div class="space space-3"></div>
+        </div>
+    </div>
+
+    <div id="title-container">
+        <h1 id="main-title">Cargando tu Galaxia...</h1>
+    </div>
+    <audio id="background-music" loop>
+        <source id="music-source" src="" type="audio/mpeg">
+    </audio>
+
+    <div id="image-data" style="display:none"> </div>
+    <!-- Modal para imagen y mensaje -->
+    <div id="image-modal">
+        <div id="modal-content">
+            <button id="close-modal">&times;</button>
+            <img id="modal-image"src="" alt="Imagen especial">
+            <div id="modal-message"></div>
+        </div>
+    </div>
+    
+    <canvas id="galaxy-canvas"></canvas>
+    <!-- Contenedor oculto con datos de imágenes (usado por scripts.js) -->
+    <script type="module" src="./js/visor-galaxia.js"></script>
+    <script type="module" src="./js/galaxia-de-fotos.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalizar Galaxia de Fotos</title>
+    <link rel="stylesheet" href="./css/galaxia-de-imagenes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="form-container">
+
+        <a href="../index.html" class="btn-back" title="Volver al Inicio">
+            <i class="fas fa-arrow-left"></i>
+            <span>Volver</span>
+        </a>
+
+        <header class="form-header">
+            <h1>✨ Personaliza tu Galaxia</h1>
+            <p>Rellena los campos para crear un link único</p>
+        </header>
+
+        <form id="galaxiaForm">
+            <div class="section">
+                <label for="pageTitle"><i class="fas fa-heading"></i> Título de la Pestaña</label>
+                <input type="text" id="pageTitle" placeholder="Ej: Para mi persona favorita" required>
+                
+                <label for="mainTitle"><i class="fas fa-heart"></i> Mensaje Principal </label>
+                <input type="text" id="mainTitle" placeholder="Ej: Eres la mejor del mundo 💖" required>
+            </div>
+
+            <div class="section">
+                <label><i class="fas fa-images"></i> Sube tus Fotos y Mensajes (Máximo 10)</label>
+                <div class="upload-area" id="dropZone">
+                    <input type="file" id="imageInput" multiple accept="image/*" hidden>
+                    <p>Haz clic o arrastra las fotos aquí</p>
+                </div>
+                <div id="previewContainer" class="preview-list"></div>
+            </div>
+
+            <div class="section">
+                <label for="musicFile"><i class="fas fa-music"></i> Sube tu propia Música (MP3)</label>
+                <div class="upload-area music-upload" id="musicDropZone">
+                    <input type="file" id="musicInput" accept="audio/mp3,audio/mpeg" hidden>
+                    <p id="musicStatus">Haz clic para subir un MP3</p>
+                </div>
+                <small>Si no subes nada, se usará la música por defecto.</small>
+            </div>
+
+            <div class="section">
+                <label for="adjetivos"><i class="fas fa-tags"></i> Palabras Lindas (Separadas por comas)</label>
+                <textarea id="adjetivos" rows="3" placeholder="Ej: Fantástica, Preciosa, Única..."></textarea>
+                <small>Estas palabras flotarán en la galaxia.</small>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnCrear">
+                <span class="btn-text">Generar Proyecto Mágico</span>
+                <i class="fas fa-rocket"></i>
+            </button>
+        </form>
+
+        <div id="resultModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>¡Galaxia Creada! 🚀</h3>
+                <p>Copia y comparte este enlace:</p>
+                <div class="copy-box">
+                    <input type="text" id="finalUrl" readonly>
+                    <button onclick="copiarUrl()"><i class="fas fa-copy"></i></button>
+                </div>
+                <button class="btn-close" onclick="cerrarModal()">Listo</button>
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px;">
+                    <button class="btn-close" onclick="cerrarModal()">Crear otro</button>
+                    <a href="../index.html" class="btn-close" style="text-decoration: none; display: flex; align-items: center; gap: 5px;">
+                        Ir al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script  type="module" src="./js/personalizar-galaxia.js"></script>
+</body>
+</html>
