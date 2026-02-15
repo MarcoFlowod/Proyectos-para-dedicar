@@ -15,53 +15,56 @@ import * as THREE from 'three';
     const db = getFirestore(app);
 
     let imageData = [];
+    let started = false;
+    let initialized = false;
+    let dataLoaded = false;
     let adjetivosPersonalizados = ["Fantástica", "Preciosa", "Linda"]; // Variable para Firebase
 
     async function cargarDatos() {
         const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
+        const idGalaxia = params.get('id');
 
-        if (id) {
-            try {
-                const docRef = doc(db, "galaxias", id);
-                const docSnap = await getDoc(docRef);
+        if (!idGalaxia) return;
 
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    // Usar los nombres correctos guardados en personalizar-galaxia.js
-                    document.getElementById('main-title').innerText = data.tituloH1 || data.titulo;
-                    document.title = data.tituloPestana || data.titulo;
-                    
-                    adjetivosPersonalizados = data.adjetivos || ["Eres Magia", "Increíble", "Especial"];
-                    
-                    // Las fotos ya vienen como array de objetos {url, message}
-                    imageData = data.fotos || [];
-                    
-                    // Si hay música, cargarla
-                    if (data.musicaUrl) {
-                        const audioElement = document.getElementById('background-music');
-                        const sourceElement = document.getElementById('music-source');
-                        sourceElement.src = data.musicaUrl;
-                        audioElement.load();
-                    }
-                    
-                    return; 
+        try {
+            const docRef = doc(db, "galaxias", idGalaxia);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                
+                // 1. Aplicamos los títulos guardados
+                document.title = data.tituloPestana || "Mi Galaxia";
+                const h1 = document.querySelector('h1');
+                if(h1) h1.innerText = data.tituloH1 || "Para Ti";
+
+                // 2. Extraemos las URLs de las fotos para Three.js
+                // IMPORTANTE: data.fotos ahora es [{url: "...", message: "..."}, ...]
+                imageData = data.fotos.map(f => ({
+                    url: f.url,
+                    message: f.message
+                }));
+
+                // 3. Cargamos la música
+                if (data.musicaUrl) {
+                    const audio = document.getElementById('background-music');
+                    if (audio) audio.src = data.musicaUrl;
                 }
-            } catch (e) {
-                console.error("Error cargando de Firebase:", e);
-            }
-        }
 
-        // Si falla o no hay ID, buscar en el HTML
-        const nodes = Array.from(document.querySelectorAll('#image-data img'));
-        if (nodes && nodes.length) {
-            imageData = nodes.map(img => ({ url: img.getAttribute('src'), message: img.dataset.message || '' }));
+                console.log("¡Galaxia cargada con éxito!");
+                dataLoaded = true;
+
+            } else {
+                console.error("No existe la galaxia con ese ID");
+            }
+        } catch (e) {
+            console.error("Error al leer de Firebase:", e);
         }
     }
 
     // --- 3. CONFIGURACIÓN DEL GALAXY ---
-    // Esperamos a cargar los datos antes de definir el objeto CONFIG
-    await cargarDatos();
+    // No llamamos a `cargarDatos()` aquí para evitar ejecutar `init()`
+    // antes de que las variables lexically-declared (ej. `scene`) existan.
     // Configuración principal del galaxy
     const CONFIG = {
         galaxy: { rotationSpeed: 0.06, centerExclusionRadius: 45 }, 
@@ -90,8 +93,13 @@ import * as THREE from 'three';
                 count: isMobile ? 30 : 30,
                 width: 100, height: 85,
                 minRadius: null, maxRadius: 150,
-                content: adjetivosPersonalizados, // <--- USAMOS LA VARIABLE DE FIREBASE
-                colors: [/* tus colores */],
+                content: adjetivosPersonalizados,
+                // AGREGA ESTOS COLORES AQUÍ:
+                colors: [
+                    { fill: '#00FFFF', shadow: '#0055ff' },
+                    { fill: '#FF69B4', shadow: '#ff1493' },
+                    { fill: '#FFFFFF', shadow: '#0099ff' }
+                ],
                 floatAmplitude: 0.7, floatSpeed: 0.6
             },
             images: {
@@ -120,6 +128,7 @@ import * as THREE from 'three';
     let raycaster, mouse;
 
     function init() {
+        initialized = true;
         scene = new THREE.Scene();
         scene.fog = new THREE.FogExp2(0x000000, 0.0007);
         clock = new THREE.Clock();
@@ -661,6 +670,17 @@ import * as THREE from 'three';
         textureLoader.setCrossOrigin('anonymous');
         
         let loadedCount = 0;
+        // Si imageData está vacío (otro módulo pudo haber inyectado las <img> en DOM),
+        // intentamos construir imageData a partir del contenedor #image-data.
+        if ((!imageData || imageData.length === 0) && typeof document !== 'undefined') {
+            const imgs = Array.from(document.querySelectorAll('#image-data img'));
+            if (imgs.length > 0) {
+                console.log('loadAssetsAndCreateElements: construyendo imageData desde DOM (#image-data)');
+                imageData = imgs.map(imgEl => ({ url: imgEl.src, message: imgEl.dataset.message || '' }));
+            }
+        }
+
+        const availableImages = imageData.length || 0;
         const totalAssets = textConfig.count + imageConfig.count;
 
         for (let i = 0; i < textConfig.count; i++) {
@@ -698,9 +718,15 @@ import * as THREE from 'three';
             updateLoadingBar(loadedCount / totalAssets);
         }
         // Función para crear textura de imagen con bordes redondeados
+        if (availableImages === 0) {
+            console.warn('loadAssetsAndCreateElements: no hay imágenes en imageData; se omiten elementos de imagen');
+        }
+
         for (let i = 0; i < imageConfig.count; i++) {
-            const imgIndex = i % imageData.length;
+            if (availableImages === 0) continue;
+            const imgIndex = i % availableImages;
             const img = imageData[imgIndex];
+            if (!img) continue;
             const url = img.url;
             const message = img.message;
             
@@ -1028,13 +1054,33 @@ import * as THREE from 'three';
         composer.render();
     }
     
-    init();
-let started = false;
+    // No inicializamos automáticamente la escena aquí — lo hará `startExperience()`
+    // `started` ya fue declarado al inicio del módulo
 // Función para iniciar la experiencia (idempotente)
-    function startExperience() {
+    async function startExperience() {
     if (started) {
         console.log("startExperience: ya iniciado, ignorando.");
         return;
+    }
+    // Esperar a que los datos (imágenes) estén cargados antes de inicializar
+    if (!dataLoaded) {
+        console.log('startExperience: esperando a que se carguen los datos...');
+        try {
+            await cargarDatos();
+        } catch (err) {
+            console.error('startExperience: error cargando datos', err);
+        }
+    }
+
+    // Si la escena no está inicializada, inicializarla ahora
+    if (!initialized) {
+        try {
+            init();
+            console.log('startExperience: escena inicializada');
+        } catch (err) {
+            console.error('startExperience: error inicializando la escena', err);
+            return;
+        }
     }
     started = true;
     console.log("startExperience: iniciado");
@@ -1211,3 +1257,33 @@ const generateSpaceLayer = (size, selector, totalStars, duration) => {
 generateSpaceLayer("2px", ".space-1", 250, "25s");
 generateSpaceLayer("3px", ".space-2", 100, "20s");
 generateSpaceLayer("6px", ".space-3", 25, "15s");
+
+cargarDatos().then(() => {
+    // Los datos ya están listos, CONFIG ya tiene las fotos
+    console.log("Sistema listo");
+});
+
+// Exponer función con el nombre que usa `visor-galaxia.js`
+window.iniciarGalaxia = async () => {
+    try {
+        await startExperience();
+    } catch (err) {
+        console.error('iniciarGalaxia: error al iniciar', err);
+    }
+};
+
+// Iniciar la galaxia al hacer click en una miniatura inyectada en `#image-data`
+document.addEventListener('click', (e) => {
+    const thumb = e.target.closest && e.target.closest('#image-data img');
+    if (thumb) {
+        try {
+            e.preventDefault();
+        } catch (err) {}
+        console.log('thumbnail clicked: iniciando galaxia');
+        window.iniciarGalaxia();
+    }
+});
+
+// También aceptar click sobre la imagen de inicio si existe
+const startImg = document.getElementById('start-img');
+if (startImg) startImg.addEventListener('click', () => window.iniciarGalaxia());

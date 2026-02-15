@@ -27,8 +27,8 @@ async function cargarGalaxia() {
 
             // 2. Configurar Música
             if (data.musicaUrl) {
-                const audio = document.getElementById('musicaFondo');
-                audio.src = data.musicaUrl;
+                const audio = document.getElementById('background-music');
+                if (audio) audio.src = data.musicaUrl;
             }
 
             // 3. Inyectar fotos y mensajes al DOM para que Three.js los use
@@ -43,11 +43,9 @@ async function cargarGalaxia() {
             // 4. Disparar los adjetivos (puedes guardarlos en window para usarlos luego)
             window.misAdjetivos = data.adjetivos;
 
-            // 5. ¡INICIAR LA ESCENA 3D!
-            // Aquí llamas a la función principal de tu galaxia-de-fotos.js
-            if (typeof iniciarGalaxia === "function") {
-                iniciarGalaxia();
-            }
+            // 5. NOTA: no iniciamos la escena aquí para respetar el
+            // comportamiento de iniciar solo tras interacción del usuario
+            // (por ejemplo, al hacer click en #start-img).
 
         } else {
             alert("La galaxia personalizada ya no existe.");
