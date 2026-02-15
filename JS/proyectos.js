@@ -4,7 +4,7 @@ const proyectos = [
         titulo: "GALAXIA DE IMÁGENES",
         url: "./Proyectos♥/galaxia-de-fotos/galaxia-de-fotos.html",
         urlDedicar: "./dedicar/personalizar-galaxia.html",
-        imagen: "./assets/img/imagen-4.webp",
+        imagen: "./assets/img/imagen-1.webp",
         alt: "Galaxia de fotos interactiva con efectos",
         layout: ""
     },
@@ -13,7 +13,7 @@ const proyectos = [
         titulo: "RAMO DE TULIPANES ROSADOS",
         url: "./Proyectos♥/ramo-de-tulipanes-rosados/index.html",
         urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-1.webp",
+        imagen: "./assets/img/imagen-2.webp",
         alt: "Ramo de tulipanes rosados interactivo",
         layout: "wide"
     },
@@ -22,16 +22,16 @@ const proyectos = [
         titulo: "CARTA PARA DEDICAR",
         url: "en-proceso",
         urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-2.webp",
+        imagen: "./assets/img/imagen-3.webp",
         alt: "Dedica carta",
-        layout: ""
+        layout: "tall"
     },
     {
         id: 4,
         titulo: "ZOOM DE GALAXIA",
         url: "en-proceso",
         urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-3.webp",
+        imagen: "./assets/img/imagen-4.webp",
         alt: "Zoom galaxia interactiva",
         layout: "tall wide"
     },    
@@ -42,7 +42,7 @@ const proyectos = [
         urlDedicar: "en-proceso",
         imagen: "./assets/img/imagen-5.webp",
         alt: "Feliz cumpleaños interactivo",
-        layout: "wide"
+        layout: ""
     },
     {
         id: 6,
@@ -51,7 +51,7 @@ const proyectos = [
         urlDedicar: "en-proceso",
         imagen: "./assets/img/imagen-7.webp",
         alt: "Galaxia de frases con animaciones",
-        layout: "tall"
+        layout: ""
     },
     {
         id: 7,
@@ -60,7 +60,7 @@ const proyectos = [
         urlDedicar: "en-proceso",
         imagen: "./assets/img/imagen-8.webp",
         alt: "Nuestro tiempo juntos interactivo",
-        layout: ""
+        layout: "wide"
     }
 ];
 
