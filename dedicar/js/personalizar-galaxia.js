@@ -159,7 +159,8 @@ form.addEventListener('submit', async (e) => {
             musicaUrl: finalMusicUrl,
             fotos: photosData,
             adjetivos: adjetivosList.length > 0 ? adjetivosList : ["Eres Magia", "Increíble", "Especial"],
-            fechaCreacion: new Date()
+            fechaCreacion: new Date(),
+            expiresAt: new Date(Date.now() + 48 * 60 * 60 * 1000) // Expira en 48 horas
         };
 
         // 5. Guardar en Firestore

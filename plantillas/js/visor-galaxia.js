@@ -1,6 +1,7 @@
 import { firebaseConfig } from "./firebase-config.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { verificarYLimpiarExpiracion } from "./cleanup-expired.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -15,6 +16,32 @@ async function cargarGalaxia() {
     }
 
     try {
+        // ✅ VERIFICAR SI EL DOCUMENTO HA EXPIRADO
+        const limpiezaResult = await verificarYLimpiarExpiracion(app, "galaxias", id);
+        
+        if (limpiezaResult.deleted) {
+            // El documento fue eliminado porque expiró
+            document.title = "Galaxia Expirada";
+            document.getElementById('main-title').innerText = "Esta galaxia ha expirado ⏳";
+            
+            const container = document.getElementById('image-data');
+            if (container) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #fff;">
+                        <h2>Los datos se mantienen durante 48 horas</h2>
+                        <p>El enlace ya no es válido.</p>
+                    </div>
+                `;
+            }
+            return;
+        }
+        
+        if (limpiezaResult.notFound) {
+            document.title = "Galaxia no encontrada";
+            document.getElementById('main-title').innerText = "La galaxia no existe";
+            return;
+        }
+
         const docRef = doc(db, "galaxias", id);
         const docSnap = await getDoc(docRef);
 

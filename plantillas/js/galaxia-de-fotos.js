@@ -6,8 +6,9 @@ import * as THREE from 'three';
 
     // --- 1. IMPORTACIONES DE FIREBASE ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     import { firebaseConfig } from "./firebase-config.js";
+    import { verificarYLimpiarExpiracion } from "./cleanup-expired.js";
 
     const isMobile = window.innerWidth < 768;
 
@@ -27,6 +28,42 @@ import * as THREE from 'three';
         if (!idGalaxia) return;
 
         try {
+            // ✅ VERIFICAR SI EL DOCUMENTO HA EXPIRADO
+            const limpiezaResult = await verificarYLimpiarExpiracion(app, "galaxias", idGalaxia);
+            
+            if (limpiezaResult.deleted) {
+                // El documento fue eliminado porque expiró
+                document.title = "Galaxia Expirada";
+                const h1 = document.querySelector('h1');
+                if(h1) h1.innerText = "Esta galaxia ha expirado ⏳";
+                
+                const titleContainer = document.getElementById('title-container');
+                if (titleContainer) {
+                    titleContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: #fff;">
+                            <h1>Esta galaxia ha expirado ⏳</h1>
+                            <p style="font-size: 18px; margin-top: 20px;">Los datos se mantienen durante 48 horas.</p>
+                            <p style="font-size: 14px; opacity: 0.7;">El enlace ya no es válido.</p>
+                        </div>
+                    `;
+                }
+                
+                // Ocultar elementos innecesarios
+                const startScreen = document.getElementById('start-screen');
+                if (startScreen) startScreen.style.display = 'none';
+                
+                dataLoaded = false;
+                return;
+            }
+            
+            if (limpiezaResult.notFound) {
+                console.error("El documento no existe o fue eliminado");
+                document.title = "Galaxia Expirada";
+                const h1 = document.querySelector('h1');
+                if(h1) h1.innerText = "Galaxia no encontrada";
+                return;
+            }
+
             const docRef = doc(db, "galaxias", idGalaxia);
             const docSnap = await getDoc(docRef);
 

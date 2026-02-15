@@ -1,39 +1,39 @@
 const proyectos = [
     {
         id: 1,
-        titulo: "RAMO DE TULIPANES ROSADOS",
-        url: "./Proyectos♥/ramo-de-tulipanes-rosados/index.html",
-        urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-1.webp",
-        alt: "Ramo de tulipanes rosados interactivo",
-        layout: ""
-    },
-    {
-        id: 2,
-        titulo: "CARTA PARA DEDICAR",
-        url: "en-proceso",
-        urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-2.webp",
-        alt: "Dedica carta",
-        layout: "wide"
-    },
-    {
-        id: 3,
-        titulo: "ZOOM DE GALAXIA",
-        url: "en-proceso",
-        urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-3.webp",
-        alt: "Zoom galaxia interactiva",
-        layout: "tall"
-    },    
-    {
-        id: 4,
         titulo: "GALAXIA DE IMÁGENES",
         url: "./Proyectos♥/galaxia-de-fotos/galaxia-de-fotos.html",
         urlDedicar: "./dedicar/personalizar-galaxia.html",
         imagen: "./assets/img/imagen-4.webp",
         alt: "Galaxia de fotos interactiva con efectos",
-        layout: "wide tall"
+        layout: ""
+    },
+    {
+        id: 2,
+        titulo: "RAMO DE TULIPANES ROSADOS",
+        url: "./Proyectos♥/ramo-de-tulipanes-rosados/index.html",
+        urlDedicar: "en-proceso",
+        imagen: "./assets/img/imagen-1.webp",
+        alt: "Ramo de tulipanes rosados interactivo",
+        layout: "wide"
+    },
+    {
+        id: 3,
+        titulo: "CARTA PARA DEDICAR",
+        url: "en-proceso",
+        urlDedicar: "en-proceso",
+        imagen: "./assets/img/imagen-2.webp",
+        alt: "Dedica carta",
+        layout: ""
+    },
+    {
+        id: 4,
+        titulo: "ZOOM DE GALAXIA",
+        url: "en-proceso",
+        urlDedicar: "en-proceso",
+        imagen: "./assets/img/imagen-3.webp",
+        alt: "Zoom galaxia interactiva",
+        layout: "tall wide"
     },    
     {
         id: 5,
@@ -51,7 +51,7 @@ const proyectos = [
         urlDedicar: "en-proceso",
         imagen: "./assets/img/imagen-7.webp",
         alt: "Galaxia de frases con animaciones",
-        layout: ""
+        layout: "tall"
     },
     {
         id: 7,
