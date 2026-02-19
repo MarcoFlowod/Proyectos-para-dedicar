@@ -6,68 +6,59 @@ const proyectos = [
         urlDedicar: "./dedicar/personalizar-galaxia.html",
         imagen: "./assets/img/imagen-1.webp",
         alt: "Galaxia de fotos interactiva con efectos",
-        layout: ""
-    },
-    {
-        id: 2,
-        titulo: "RAMO DE TULIPANES ROSADOS",
-        url: "./Proyectos♥/ramo-de-tulipanes-rosados/index.html",
-        urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-2.webp",
-        alt: "Ramo de tulipanes rosados interactivo",
         layout: "wide"
     },
     {
-        id: 3,
-        titulo: "CARTA PARA DEDICAR",
-        url: "en-proceso",
+        id: 2,
+        titulo: "RAMO DE FLORES",
+        url: "./Proyectos♥/ramo-de-flores/index.html",
         urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-3.webp",
-        alt: "Dedica carta",
-        layout: "tall"
+        imagen: "./assets/img/imagen-2.webp",
+        alt: "Ramo de flores",
+        layout: ""
     },
     {
-        id: 4,
+        id: 3,
         titulo: "ZOOM DE GALAXIA",
-        url: "en-proceso",
+        url: "./Proyectos♥/zoom-galaxia/index.html",
         urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-4.webp",
+        imagen: "./assets/img/imagen-3.webp",
         alt: "Zoom galaxia interactiva",
         layout: "tall wide"
     },    
     {
-        id: 5,
+        id: 4,
         titulo: "FELIZ CUMPLEAÑOS",
-        url: "en-proceso",
+        url: "./Proyectos♥/happy-birthday/index.html",
         urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-5.webp",
+        imagen: "./assets/img/imagen-4.webp",
         alt: "Feliz cumpleaños interactivo",
         layout: ""
     },
     {
-        id: 6,
+        id: 5,
         titulo: "GALAXIA DE FRASES",
-        url: "en-proceso",
+        url: "./Proyectos♥/galaxia-de-frases/index.html",
         urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-7.webp",
+        imagen: "./assets/img/imagen-5.webp",
         alt: "Galaxia de frases con animaciones",
         layout: ""
     },
     {
-        id: 7,
+        id: 6,
         titulo: "NUESTRO TIEMPO JUNTOS",
-        url: "en-proceso",
+        url: "./Proyectos♥/nuestro-tiempo-juntos/index.html",
         urlDedicar: "en-proceso",
-        imagen: "./assets/img/imagen-8.webp",
+        imagen: "./assets/img/imagen-6.webp",
         alt: "Nuestro tiempo juntos interactivo",
-        layout: "wide"
+        layout: ""
     }
 ];
 
 // Función para mostrar el aviso de "En Proceso"
 window.mostrarAvisoProceso = () => {
     Swal.fire({
-        title: '¡Constelación en formación!',
+        title: '¡Próximamente! 🚧',
         text: 'Estamos preparando esta experiencia mágica para ti. ¡Vuelve pronto! ✨',
         icon: 'info',
         background: '#0a0a0a',

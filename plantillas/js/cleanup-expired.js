@@ -1,7 +1,4 @@
-/**
- * Módulo para limpiar datos expirados de Firestore
- * Verifica si un documento ha alcanzado su fecha de expiración y lo elimina
- */
+
 
 import { getFirestore, doc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 

@@ -100,93 +100,66 @@ window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
 });
 
-// Interactividad del sobre
-const envelopeContainer = document.getElementById('envelope-container');
-const card = document.getElementById('card');
-const instruction = document.getElementById('instruction');
-let isOpen = false;
 
-// Función para abrir/cerrar
-function toggleEnvelope() {
-    if (!isOpen) {
-        envelopeContainer.style.animation = 'none';
-        envelopeContainer.offsetHeight; // Trigger reflow
-        
-        card.classList.add('show');
-        envelopeContainer.classList.add('hidden');
-        instruction.classList.add('hidden');
-        isOpen = true;
-        
-        // Crear confeti al abrir
-        createConfetti();
+
+
+// todo lo relacionado con la carta 
+
+function abrirCarta() {
+    const sup = document.querySelector(".superior");
+    if (sup) sup.classList.add("abrir-superior");
+
+  const h1 = document.querySelector("h1");
+  const p = document.querySelector("p");
+  if (h1) {
+    h1.style.transform = "translateY(-120px)";
+    h1.style.transition = "transform 0.65s ease-in-out";
+  }
+  if (p) {
+    p.style.transform = "translateY(-120px)";
+    p.style.transition = "transform 0.65s ease-in-out";
+  }
+
+  const heart = document.querySelector(".bx");
+  if (heart) heart.classList.add("bx-rotada");
+
+  setTimeout(() => {
+    if (sup) sup.style.zIndex = -1;
+    const msg = document.querySelector(".mensaje");
+    if (msg) msg.classList.add("abrir-mensaje");
+  }, 700);
+}
+
+function cerrarCarta() {
+  const sup = document.querySelector(".superior");
+  const msg = document.querySelector(".mensaje");
+  if (msg) msg.classList.remove("abrir-mensaje");
+
+  setTimeout(() => {
+    const h1 = document.querySelector("h1");
+    const p = document.querySelector("p");
+    if (h1) h1.style.transform = "translateY(0px)";
+    if (p) p.style.transform = "translateY(0px)";
+
+    if (sup) {
+      sup.style.zIndex = 0;
+      sup.classList.remove("abrir-superior");
+    }
+
+    const heart = document.querySelector(".bx");
+    if (heart) heart.classList.remove("bx-rotada");
+  }, 700);
+}
+
+// set up container toggle behavior
+const contenedor = document.querySelector("#AbrirContenedor");
+if (contenedor) {
+  contenedor.addEventListener("click", () => {
+    const msg = document.querySelector(".mensaje");
+    if (msg && msg.classList.contains("abrir-mensaje")) {
+      cerrarCarta();
     } else {
-        card.classList.remove('show');
-        envelopeContainer.classList.remove('hidden');
-        instruction.classList.remove('hidden');
-        isOpen = false;
+      abrirCarta();
     }
+  });
 }
-
-// Click event
-envelopeContainer.addEventListener('click', function(e) {
-    e.stopPropagation();
-    toggleEnvelope();
-});
-
-// Touch events para mejor soporte en móviles
-envelopeContainer.addEventListener('touchstart', function(e) {
-    e.stopPropagation();
-    toggleEnvelope();
-});
-
-// Cerrar tarjeta al hacer clic fuera
-document.addEventListener('click', function(e) {
-    if (isOpen && !card.contains(e.target) && !envelopeContainer.contains(e.target)) {
-        card.classList.remove('show');
-        envelopeContainer.classList.remove('hidden');
-        instruction.classList.remove('hidden');
-        isOpen = false;
-    }
-});
-
-// Cerrar tarjeta con touch fuera
-document.addEventListener('touchstart', function(e) {
-    if (isOpen && !card.contains(e.target) && !envelopeContainer.contains(e.target)) {
-        card.classList.remove('show');
-        envelopeContainer.classList.remove('hidden');
-        instruction.classList.remove('hidden');
-        isOpen = false;
-    }
-});
-
-// Crear confeti decorativo
-function createConfetti() {
-    const confettiAmount = isSmallMobile ? 15 : 30;
-    const confettiSymbols = ['❤️', '💕', '🌷', '✨', '💖', '💘', '❀'];
-    
-    for (let i = 0; i < confettiAmount; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.position = 'fixed';
-        confetti.style.left = Math.random() * window.innerWidth + 'px';
-        confetti.style.top = '-20px';
-        confetti.textContent = confettiSymbols[Math.floor(Math.random() * confettiSymbols.length)];
-        confetti.style.fontSize = isSmallMobile ? '1.5em' : '2em';
-        confetti.style.pointerEvents = 'none';
-        confetti.style.zIndex = '20';
-        document.body.appendChild(confetti);
-        
-        const duration = 3 + Math.random() * 2;
-        
-        confetti.animate([
-            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-            { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
-        ], {
-            duration: duration * 1000,
-            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        });
-        
-        setTimeout(() => confetti.remove(), duration * 1000);
-    }
-}
-
-

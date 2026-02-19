@@ -3,30 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/ramo-de-tulipanes.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Young+Serif&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/boxicons@2.1.2/css/boxicons.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./assets/ramo-de-tulipanes.css">
   <title>Eres perfecta💘</title>
 </head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+
 <body class="not-loaded">
+
+  <canvas id="loveRain"></canvas>
   <audio src="https://github.com/Baque2005/ReparacionSysteclinx/raw/refs/heads/main/Eldar%20Kedem%20-%20%20Walking%20Around.mp3" autoplay></audio>
   <div class="night"></div>
   
-  <div class="special-text">“Para ti, hermosa💚💙💓🌷.”</div>
+  <!--===== carta =====-->
   
-
-  <div class="shooting-stars">
-    <div class="shooting-star"></div>z
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
-    <div class="shooting-star"></div>
+  <div class="contenedor" id="AbrirContenedor">
+    <div class="superior"></div>
+    <div class="mensaje">
+      El amor está en las pequeñas cosas, en los momentos compartidos, en las
+      sonrisas y en los gestos que nos hacen sentir vivos. Hoy celebramos esos
+      detalles que hacen que el mundo sea un lugar más bonito
+    </div>
+    <div class="carta">
+      <i class="bx bxs-heart"></i>
+    </div>
   </div>
-  
+
   <div class="flowers">
     <div class="flower flower--1">
       <div class="flower__leafs flower__leafs--1">
@@ -214,26 +224,9 @@
   </div>
   <div class="ramo">
     <img src="https://github.com/Baque2005/public-files/blob/main/2025/240ac6a013e67096cb3c12002d928aa3.png?raw=true" alt="Ramo de flores">    
-    <div class="montes">
-      <svg class="monte monte-izq" viewBox="0 0 120 60" width="120" height="60">
-        <path d="M0,60 Q30,10 60,60 Q90,30 120,60 Z" fill="#4a7c23" opacity="0.85"/>
-        <path d="M10,60 Q35,25 60,60 Q80,40 110,60 Z" fill="#6b8e23" opacity="0.7"/>
-      </svg>
-      <svg class="monte monte-der" viewBox="0 0 120 60" width="120" height="60">
-        <path d="M0,60 Q30,30 60,60 Q90,10 120,60 Z" fill="#4a7c23" opacity="0.85"/>
-        <path d="M10,60 Q40,40 60,60 Q85,25 110,60 Z" fill="#8fcf5a" opacity="0.7"/>
-      </svg>
-    </div>
   </div>
-  <div class="heart"></div>
 
-  <script>
-    document.body.classList.remove('not-loaded');
-    // Espera a que terminen las animaciones de los tulipanes (~2.5s)
-    setTimeout(function() {
-      document.querySelector('.ramo').classList.add('ramo--visible');
-    }, 2500);
-  </script>
+  <script src="./assets/script.js"></script>
 </body>
 
 </html>

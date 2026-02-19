@@ -19,7 +19,7 @@ import * as THREE from 'three';
     let started = false;
     let initialized = false;
     let dataLoaded = false;
-    let adjetivosPersonalizados = ["Fantástica", "Preciosa", "Linda"]; // Variable para Firebase
+    let adjetivosPersonalizados = ["Fatásnica","Preciosa", "Linda", "Perfecta", "Guapa", "Hermosa", "Bella", "Divina", "Bonita", "Encantadora", "Maravillosa", "Adorable", "Dulce", "Cariñosa", "Amable", "Tierna", "Deslumbrante", "Inolvidable", "Única", "Especial", "Irresistible", "Magnífica", "Cautivadora"]; // Variable para Firebase
 
     async function cargarDatos() {
         const params = new URLSearchParams(window.location.search);
@@ -135,7 +135,12 @@ import * as THREE from 'three';
                 colors: [
                     { fill: '#00FFFF', shadow: '#0055ff' },
                     { fill: '#FF69B4', shadow: '#ff1493' },
-                    { fill: '#FFFFFF', shadow: '#0099ff' }
+                    { fill: '#1E90FF', shadow: '#1E90FF' },
+                    { fill: '#87CEEB', shadow: '#87CEEB' },
+                    { fill: '#7b2ff7', shadow: '#7b2ff7' },
+                    { fill: '#f107a3', shadow: '#7b2ff7' },
+                    { fill: '#00FFFF', shadow: '#00FFFF' },
+                    { fill: '#FF69B4', shadow: '#FF69B4' },
                 ],
                 floatAmplitude: 0.7, floatSpeed: 0.6
             },

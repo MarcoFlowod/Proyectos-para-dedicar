@@ -1,0 +1,26 @@
+/* Fondo y estructura */
+body, html {
+  margin: 0;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+
+  mask-image: url("../../../assets/img/corazon.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 50px;
+
+  animation: lock-reveal 5s forwards ease-in-out;
+}
+
+@keyframes lock-reveal {
+  100% {
+    mask-size: 1000vh;
+  }
+}
+
+canvas {
+  display: block;
+}
+
+
