@@ -110,14 +110,9 @@ function abrirCarta() {
     if (sup) sup.classList.add("abrir-superior");
 
   const h1 = document.querySelector("h1");
-  const p = document.querySelector("p");
   if (h1) {
     h1.style.transform = "translateY(-120px)";
     h1.style.transition = "transform 0.65s ease-in-out";
-  }
-  if (p) {
-    p.style.transform = "translateY(-120px)";
-    p.style.transition = "transform 0.65s ease-in-out";
   }
 
   const heart = document.querySelector(".bx");
@@ -133,22 +128,44 @@ function abrirCarta() {
 function cerrarCarta() {
   const sup = document.querySelector(".superior");
   const msg = document.querySelector(".mensaje");
-  if (msg) msg.classList.remove("abrir-mensaje");
+  const heart = document.querySelector(".bx");
+  const h1 = document.querySelector("h1");
 
-  setTimeout(() => {
-    const h1 = document.querySelector("h1");
-    const p = document.querySelector("p");
-    if (h1) h1.style.transform = "translateY(0px)";
-    if (p) p.style.transform = "translateY(0px)";
+  if (msg) {
+    // 1. Iniciamos la animación de bajada del mensaje
+    msg.classList.remove("abrir-mensaje");
+    msg.classList.add("cerrar-mensaje");
 
-    if (sup) {
-      sup.style.zIndex = 0;
-      sup.classList.remove("abrir-superior");
-    }
+    // ESCUCHAMOS: Cuando el mensaje termina de entrar a la carta
+    msg.addEventListener("animationend", () => {
+      msg.classList.remove("cerrar-mensaje");
+      msg.style.zIndex = "-1";
 
-    const heart = document.querySelector(".bx");
-    if (heart) heart.classList.remove("bx-rotada");
-  }, 700);
+      if (sup) {
+        // 2. Devolvemos el z-index para que la solapa tape el mensaje
+        sup.style.zIndex = "5";
+        // 3. Cerramos la solapa (esto activa la transition de .75s del CSS)
+        sup.classList.remove("abrir-superior");
+
+        // ESCUCHAMOS: Cuando la solapa termina su transición de cierre
+        sup.addEventListener("transitionend", function alTerminarCierre(e) {
+          if (e.propertyName === 'transform') {
+            
+            // 4. RECIÉN AQUÍ: El corazón vuelve a su estado original
+            if (heart) {
+                heart.classList.remove("bx-rotada");
+            }
+            
+            // También podemos devolver el H1 aquí si lo deseas
+            if (h1) h1.style.transform = "translateY(0px)";
+
+            // Limpiamos el evento para que no se acumule
+            sup.removeEventListener("transitionend", alTerminarCierre);
+          }
+        }, { once: true });
+      }
+    }, { once: true });
+  }
 }
 
 // set up container toggle behavior

@@ -24,6 +24,21 @@ body {
     background-color: var(--dark-color);
     overflow: hidden;
     perspective: 1000px;
+
+    mask-image: url("../../../assets/img/corazon.svg");
+    mask-composite: exclude;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 50px;
+
+
+    animation: lock-reveal 5s forwards ease-in-out;
+}
+
+@keyframes lock-reveal {
+    100% {
+        mask-size: 1000vh;
+    }
 }
 
 canvas {
@@ -80,6 +95,8 @@ canvas {
     position: relative;
     z-index: 5;
     margin-top: 200px;
+    display: grid;
+    place-items: center;
 }
 
 .superior {
@@ -89,10 +106,20 @@ canvas {
     border-top: 160px solid #f08080;
     border-bottom: 160px solid transparent;
 
-    transition: transform .75s;
+    transition: transform .75s, z-index 0s;
     transform-origin: top;
+    z-index: 10;
 }
 
+.fondo {
+    position: absolute;
+    border-left: 220px solid transparent;
+    border-right: 220px solid transparent;
+    border-top: 160px solid #fff9c4;
+    border-bottom: 160px solid transparent;
+    transform-origin: top;
+    z-index: -2;
+}
 .mensaje {
     position: absolute;
     padding: 1.5rem;
@@ -104,8 +131,7 @@ canvas {
     background: #eae2b7;
     width: 440px;
     height: 320px;
-    z-index: -1;
-    transition: transform 0.75s ease-in-out;
+    transition: transform .75s ease-in-out;
 }
 
 .mensaje:before {
@@ -118,41 +144,75 @@ canvas {
     bottom: 55px; 
 }
 
-.mensaje p{
-    position: relative;
-    top: -10px;
-    font-size: 1.2rem;
-}
 
 .carta {
-    border-left: 220px solid #f8ad9d;
+    position: absolute;
+    border-left: 220px solid #f4978e;
     border-right: 220px solid #f4978e;
     border-top: 160px solid transparent;
-    border-bottom: 160px solid #f8ad9d;
+    border-bottom: 160px solid #f9a998;
+    display: grid;
+    place-items: center;
+    z-index: 10;
 }
 
 .bx {
     position: absolute;
     color: #f6406a;
-    top: 120px;
-    right: 195px;
     font-size: 60px;
-    transition: transform 0.75s ease-in-out;
     animation: palpitar 0.6s linear infinite;
+    z-index: 5;
 }
+
 
 .abrir-superior {
     transform: rotateX(180deg);
 }
 
 .abrir-mensaje {
-    transform: translateY(-100px);
+    /* el mensaje sale hacia arriba, pega un salto y vuelve a reposicionarse sobre la carta */
+    z-index: 10; /* aseguramos que quede por encima al terminar */
+    animation: mensaje-salida 3s forwards;
+}
+
+/* animación que simula al mensaje saliendo de la carta y quedando visible sobre ella */
+@keyframes mensaje-salida {
+    0% {
+        transform: translateY(0);
+        z-index: -1; /* comienza detrás */
+    }
+    50% {
+        transform: translateY(-320px);
+        z-index: -1; /* aún detrás mientras sube */
+    }
+    100% {
+        transform: translateY(-100px); /* posición final deseada */
+        z-index: 50; 
+    }
+}
+
+/* clase de cierre con animación inversa */
+.cerrar-mensaje {
+    animation: mensaje-entrada 2s forwards;
+}
+
+@keyframes mensaje-entrada {
+    0% {
+        transform: translateY(-100px);
+        z-index: 60;
+    }
+    50% {
+        transform: translateY(-340px);
+        z-index: -1;
+    }
+    100% {
+        transform: translateY(0);
+        z-index: -1;
+    }
 }
 
 .bx-rotada {
-    color: #f6406a;
     animation: none;
-    transform: rotate(90deg);
 }
 
 
@@ -168,8 +228,6 @@ canvas {
     }
 }
 
-
-
 /* --======= Todo lo relacionado con el ramo de los tulipanes =======--*/
 .flowers {
     position: relative;
@@ -179,15 +237,11 @@ canvas {
 
 .flower {
     position: absolute;
-    bottom: 15vmin; /*ajustar la posición de todas los tulipanes*/
+    bottom: -15vmin; /*ajustar la posición de todas los tulipanes*/
     transform-origin: bottom center;
     z-index: 50;
 }
-@media (max-width: 500px) {
-    .flower {
-        bottom: 35vmin;
-    }
-}
+
 .flower--1 {
     animation: moving-flower-1 4s linear infinite;
 }
@@ -379,12 +433,7 @@ canvas {
         0 0 0.5vmin #ffd700,
         inset 0 0 1.5vmin rgba(255, 255, 255, 0.6);
 }
-@media(max-width: 500px) {
-    .flower__leaf {
-        width: 15vmin;
-        height: 21vmin;
-    }
-}
+
 /* Pétalos externos */
 .flower__leaf--1 { transform: translate(-50%, -5%) rotate(-22deg); z-index: 1; }
 .flower__leaf--2 { transform: translate(-50%, -5%) rotate(22deg);  z-index: 1; }
@@ -460,17 +509,7 @@ canvas {
     );
     box-shadow: inset 0 0 1vmin rgba(0, 0, 0, 0.3);
 }
-@media (max-width: 500px){
-    .flower__line {
-        height: 100vmin;
-        width: 4vmin;
-    }
-    .flower--1 .flower__line{ height: 107vmin; }
-    .flower--2 .flower__line { height: 104vmin; }
-    .flower--4 .flower__line{ height: 104vmin; }
-    .flower--5 .flower__line { height: 104vmin; }
-    .flower__line__leaf { --w: 15vmin}
-}
+
 .flower__line__leaf--1 {
     transform: rotate(70deg) rotateY(30deg);
 }
@@ -879,7 +918,7 @@ canvas {
 
 .ramo {
     position: absolute;
-    bottom: -22vmin;
+    bottom: -26vmin;
     left: 50%;
     transform: translateX(-50%);
     z-index: 0;
@@ -893,9 +932,51 @@ canvas {
     width: 70vmin;/* Ajusta el tamaño del ramo según el diseño */
     height: auto;
 }
-@media (max-width: 500px) {
+@media (max-width: 480px) {
+    .contenedor {
+        margin-top: 120px;
+    }
+    
+    .superior {
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        border-top: 120px solid #f08080;
+        border-bottom: 120px solid transparent;
+    }
+
+    .fondo {
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        border-top: 120px solid #fff9c4;
+        border-bottom: 120px solid transparent;
+    }
+    .carta {
+        border-left: 150px solid #f4978e;
+        border-right: 150px solid #f4978e;
+        border-top: 120px solid transparent;
+        border-bottom: 120px solid #f8ad9d;
+    }
+
+    .mensaje {
+        width: 300px;
+        height: 240px;
+    }
+
+    .flower__line {
+        height: 117vmin;
+        width: 6vmin;
+    }
+    .flower--1 .flower__line{ height: 120vmin; }
+    .flower--2 .flower__line { height: 117vmin; }
+    .flower--4 .flower__line{ height: 117vmin; }
+    .flower--5 .flower__line { height: 117vmin; }
+    .flower__line__leaf { --w: 16vmin}
+
+    .ramo {
+        bottom: -10vmin;
+    }
     .ramo img {
-        width: 75vmin;
+        width: 100vmin;
     }
 }
 
