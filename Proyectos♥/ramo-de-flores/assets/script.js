@@ -109,12 +109,6 @@ function abrirCarta() {
     const sup = document.querySelector(".superior");
     if (sup) sup.classList.add("abrir-superior");
 
-  const h1 = document.querySelector("h1");
-  if (h1) {
-    h1.style.transform = "translateY(-120px)";
-    h1.style.transition = "transform 0.65s ease-in-out";
-  }
-
   const heart = document.querySelector(".bx");
   if (heart) heart.classList.add("bx-rotada");
 
@@ -155,9 +149,6 @@ function cerrarCarta() {
             if (heart) {
                 heart.classList.remove("bx-rotada");
             }
-            
-            // También podemos devolver el H1 aquí si lo deseas
-            if (h1) h1.style.transform = "translateY(0px)";
 
             // Limpiamos el evento para que no se acumule
             sup.removeEventListener("transitionend", alTerminarCierre);

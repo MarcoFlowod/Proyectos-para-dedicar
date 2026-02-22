@@ -123,25 +123,42 @@ canvas {
 .mensaje {
     position: absolute;
     padding: 1.5rem;
-    line-height: 1.5rem;
-    box-sizing: border-box;
-    text-align: center;
-    font-family: 'Brush Script MT', cursive;
-    font-size: 22px;
     background: #eae2b7;
-    width: 440px;
+    width: 430px;
     height: 320px;
     transition: transform .75s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.mensaje p {
+    font-size: 1.6rem;
+    font-family: 'Brush Script MT', cursive;
+    line-height: 2rem;
+    text-align: center;
+    transition: transform .75s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    overflow: hidden;
+}
+
+
+
+
 .mensaje:before {
+    position: absolute;
     content: "";
     border-style: dotted;
     position: absolute;
-    top: 12px;
-    left: 12px; 
-    right: 12px; 
-    bottom: 55px; 
+    inset: 0;
+    margin: 20px;
 }
 
 
@@ -182,7 +199,7 @@ canvas {
         z-index: -1; /* comienza detrás */
     }
     50% {
-        transform: translateY(-320px);
+        transform: translateY(-340px);
         z-index: -1; /* aún detrás mientras sube */
     }
     100% {
@@ -411,7 +428,7 @@ canvas {
     transform: translate(-50%, -100%);
     width: 15vmin;
     height: 8vmin;
-    background-color: #ca00e5; /* Color brillante de todos los tulipanes */
+    background-color: #ca00e5; 
     filter: blur(10vmin);
 }
 
@@ -422,7 +439,7 @@ canvas {
     left: 50%;
     width: 15vmin;
     height: 20vmin;
-    background: radial-gradient(circle at 50% 20%, #ffffb0 0%, #fe60c7c8 40%, #da71be 100%);
+    background: radial-gradient(circle at 50% 20%, #ffffb0 0%, #fe60c7c8 40%, #da71be 100%); /*color del pétalo*/
     border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
     transform-origin: bottom center;
     opacity: 0.95;
@@ -445,9 +462,9 @@ canvas {
 .flower__leaf--6 {
     width: 7vmin;
     height: 12vmin;
-    background: radial-gradient(circle at 50% 20%, #fff7a1 0%, #d26cd5 50%, #ff84c6 100%);
+    background: radial-gradient(circle at 50% 20%, #fff7a1 0%, #d26cd5 50%, #ff84c6 100%); /*parte del centro de la flor*/
     opacity: 0.9;
-    border: 1px solid #ffdd55;
+    border: 1px solid #ff55eb;/*color del borde del centro de la flor*/
     border-radius: 50% 50% 45% 45% / 65% 65% 35% 35%;
     box-shadow:
         0 0 0.8vmin #fff9c4,
@@ -467,12 +484,11 @@ canvas {
     width: 4vmin;
     height: 4vmin;
     border-radius: 50%;
-    background:
-        radial-gradient(circle at 30% 30%, #db74ca 0%, #cc0088 80%, #fffde7 100%);
-    border: 2px solid #ffe135;
+    background:#cc0088;/*fruto¨*/
+    border: 2px solid #ee35ff; /*color del borde fruto*/
     box-shadow:
         0 0 1vmin #fffde7,
-        0 0 0.5vmin #ffd700,
+        0 0 0.5vmin #ff00d0,
         inset 0 0 1vmin #cc6600;
 }
 /* Tallo del tulipán */
@@ -765,21 +781,6 @@ canvas {
     z-index: 100;
 }
 
-.special-text {
-    position: fixed;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgb(247, 119, 228);
-    font-family: 'Arial', sans-serif;
-    font-size: 10vmin;
-    text-shadow: 10 10 1vmin rgba(0, 225, 255, 0.5);
-    z-index: 10;
-    opacity: 0;
-    animation: fadeIn 3s 1s forwards;
-    text-align: center;
-    font-family: italic;
-}
 
 /* KEYFRAMES */
 @keyframes fadeIn {
@@ -934,8 +935,9 @@ canvas {
 }
 
 @media (max-width: 480px) {
-
-    
+    .contenedor {
+        margin-top: 130px;
+    }
     .superior {
         border-left: 150px solid transparent;
         border-right: 150px solid transparent;
@@ -959,6 +961,11 @@ canvas {
     .mensaje {
         width: 300px;
         height: 240px;
+    }
+
+    .mensaje p {
+        font-size: 1.2rem;
+        line-height: 1.2rem;
     }
 
     .flower {
