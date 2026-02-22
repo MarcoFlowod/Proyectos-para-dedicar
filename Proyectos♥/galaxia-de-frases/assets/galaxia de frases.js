@@ -97,13 +97,13 @@
     const WORDS=[],baseWords=[
         "💖 Mi amor", "🌞 Mi sol", "🌎 Mi mundo", "✨ Brillas", "❤️ Te amo", "🌌 Universo",
 
-        "👑 Mi Rey", "🌠 Estrella", "💫 Mi cielo", "🔥 Siempre tú", "🎶 Tu risa",  "🦋 Libertad",
+        "👑 Mi Reina", "🌠 Estrella", "💫 Mi cielo", "🔥 Siempre tú", "🎶 Tu risa",  "🦋 Libertad",
 
         "💎 Eres todo", "🙏 Gracias", "💕 Cariño", "🌹 Amor eterno", "🤗 Abrazos",  "🌸 Esperanza",
 
         "🌈 Alegría", "🌟 Contigo", "🧸 Ternura", "🎁 Mi razón", "🌙 Mi destino",  "💌 Recuerdos",
 
-        "🕊️ Mi paz", "🪐 Mi universo", "🌊 Mi calma", "💡 Mi luz", "🍒 Dulzura", "🥰 Mi vida",
+        "🕊️ Mi paz", "🪐 Mi universo", "🌌 Mi Galaxia ", "🌊 Mi calma", "💡 Mi luz", "🍒 Dulzura", "🥰 Mi vida",
 
         "🎇 Felicidad", "🌻 Alegría", "🌺 Mi flor", "💜 Eternidad", "🌟 Sueños",  "✨ Magia",
 

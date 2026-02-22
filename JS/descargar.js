@@ -110,22 +110,7 @@ function loadProjectsData() {
         githubDownload: '',
         status: 'en-proceso'
       },
-      {
-        img: './assets/img/imagen-7.webp',
-        title: 'GALAXIA DE FRASES',
-        tags: ['En Proceso',/* 'Frases', 'Inspirador' */],
-        link: './Proyectos♥/galxia-de-frases/index.html',
-        githubDownload: '',
-        status: 'en-proceso'
-      },
-      {
-        img: './assets/img/imagen-8.webp',
-        title: 'NUESTRO TIEMPO JUNTOS',
-        tags: ['En Proceso',/* 'Romántico', 'Memorias' */],
-        link: './Proyectos♥/nuestro-tiempo-juntos/index.html',
-        githubDownload: '',
-        status: 'en-proceso'
-      }
+
     ];
 }
 

@@ -233,27 +233,28 @@ button:focus {
     background-color: rgba(14, 13, 13, 0.9);
 }
 
-.header-icon {
+.header-logo {
     width: 150px;
     transition: transform var(--transition-fast);
 }
 
-.header-icon:hover {
+.header-logo:hover {
     transform: scale(1.05);
 }
 
-.header-icon img {
+.header-logo img {
     width: 100%;
     height: auto;
     display: block;
 }
 
-.header-redes {
+.header-btns {
     display: flex;
     gap: var(--space-sm);
 }
 
-.header-txt {
+.header-redes {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -267,17 +268,16 @@ button:focus {
     transition: all var(--transition-normal);
     text-decoration: none;
     cursor: pointer;
-    position: relative;
 }
 
-.header-txt i {
+.header-redes i {
     font-size: 1.25rem;
     color: var(--color-text-light);
     transition: transform var(--transition-normal);
     flex-shrink: 0;
 }
 
-.header-label {
+.header-txt {
     display: none;
     font-size: 0.9rem;
     color: var(--color-text-muted);
@@ -286,27 +286,78 @@ button:focus {
     font-weight: 500;
 }
 
-.header-txt:hover,
-.header-txt:focus-visible {
-    width: 160px;
+.header-redes:hover,
+.header-redes:focus-visible {
+    width: 110px;
     border-color: var(--color-primary);
     background-color: rgba(3, 175, 255, 0.1);
 }
 
-.header-txt:hover .header-label,
-.header-txt:focus-visible .header-label {
+.header-redes:hover .header-txt,
+.header-redes:focus-visible .header-txt {
     display: inline-block;
     animation: fadeIn var(--transition-fast);
 }
 
-.header-txt:hover i,
-.header-txt:focus-visible i {
+.header-redes:hover i,
+.header-redes:focus-visible i {
     transform: scale(1.1);
 }
 
-.header-txt:active {
+.header-redes:active {
     transform: scale(0.95);
 }
+
+.button-descargas {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--color-border);
+    background-color: var(--color-bg-light);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.button-descargas, .button__icon, .button__text {
+    transition: all 0.3s;
+}
+
+.button-descargas .button__text {
+    transform: translateX(21px);
+    color: var(--color-text-light);
+    font-weight: 600;
+}
+
+.button-descargas .button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: var(--color-bg-medium); /*cambiar esto en el resposnsive*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.button-descargas:hover {
+    background: var(--color-bg-card);
+    border-color: var(--color-primary)
+}
+
+.button-descargas:hover .button__text {
+    color: transparent;
+}
+
+.button-descargas:hover .button__icon {
+    width: 148px;
+    transform: translateX(0);
+    background-color: rgba(3, 175, 255, 0.01)
+}
+
 
 /* ========== PROYECTOS ========== */
 .proyectos-container {
@@ -1099,19 +1150,40 @@ button:focus {
         padding: var(--space-sm);
     }
     
-    .header-label {
+    .header-txt {
         display: none !important;
     }
 
-    .header-txt:hover,
-    .header-txt:focus-visible {
+    .header-redes:hover,
+    .header-redes:focus-visible {
         width: 40px;
         border-color: var(--color-border);
         background-color: var(--color-bg-light);
     }
-    .header-icon {
+    .header-logo {
         width: 120px;
     }
+
+    .button-descargas {
+        width: 40px; 
+        justify-content: center;
+    }
+
+    .button-descargas .button__text {
+        display: none;
+    }
+
+    .button-descargas .button__icon {
+        position: relative;
+        transform: translateX(0);
+        width: 100%;
+        background-color: transparent;
+    }
+
+    .button-descargas:hover .button__icon {
+        width: 100%;
+    }
+
 
     /* Proyectos */
     .proyectos-container {
@@ -1252,7 +1324,7 @@ button:focus {
         display: inline-block;
     }
     
-    .header-txt {
+    .header-redes {
         border: 3px solid #000;
     }
     

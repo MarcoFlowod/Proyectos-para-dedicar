@@ -932,10 +932,9 @@ canvas {
     width: 70vmin;/* Ajusta el tamaño del ramo según el diseño */
     height: auto;
 }
+
 @media (max-width: 480px) {
-    .contenedor {
-        margin-top: 120px;
-    }
+
     
     .superior {
         border-left: 150px solid transparent;
@@ -960,6 +959,10 @@ canvas {
     .mensaje {
         width: 300px;
         height: 240px;
+    }
+
+    .flower {
+        bottom: -10vmin;
     }
 
     .flower__line {

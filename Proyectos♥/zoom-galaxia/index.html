@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I LOVE YOU CANTIKU</title>
+  <title>Eres Mi Galaxia 🌌</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="modal-inicio">
+  <div class="star-screen" id="modal-inicio">
     <div id="btn-iniciar">
-      <img src="https://i.pinimg.com/originals/4a/93/44/4a93448190990de3a4010bd3d28e0716.gif" alt="imagen de inicio">
+      <img src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/1024px/1f499.png" alt="imagen de inicio">
     </div>
+    <canvas id="loveCanvas"></canvas>
   </div>
-  <canvas id="canvas" style="z-index:1;"></canvas>
-  <audio id="bg-music" preload="auto">
-    <source src="../coleción-de-imágenes/assets/coleccion/I'm Not In Love.mp3" type="audio/mpeg">
+  
+  <canvas id="canvas"></canvas>
+
+  <audio id="bg-music" preload="auto" >
+    <source src="../imagenes/Down With My Baby-Kevin Johansen.mp3" type="audio/mpeg">
   </audio>
 
   <script src="love.js"></script>

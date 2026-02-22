@@ -31,8 +31,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="./CSS/styles.css" />
-    <link rel="icon" href="assets/img/creeper.gif" type="image/x-icon">
-    <title>Detalles Creeper - Proyectos Románticos Especiales</title>
+    <link rel="icon" href="assets/img/dedica-love-favicon.svg" type="image/x-icon">
+    <title>dedica.love</title>
 </head>
 <body>
     <section id="skeletonLoading" class="skeleton-loading" role="alert" aria-live="polite" aria-label="Cargando contenido">
@@ -49,20 +49,27 @@
     </section>
 
     <header class="header" role="banner">
-        <a class="header-icon" href="#" aria-label="Inicio - Volver al portafolio principal">
+        <a class="header-logo" href="#" aria-label="Inicio - Volver al portafolio principal">
             <img src="./assets/img/icon.png" alt="Logo Detalles Creeper" width="150" height="40">
         </a>
         
-        <nav class="header-redes" role="navigation" aria-label="Enlaces de contacto y descargas">
-            <a class="header-txt" href="https://wa.link/2qznod" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <nav class="header-btns" role="navigation" aria-label="Enlaces de contacto y descargas">
+            <a class="header-redes" href="https://wa.link/2qznod" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                <span class="header-label">Whatsapp</span>
+                <span class="header-txt">Whatsapp</span>
             </a>
             
-            <a class="header-txt" id="openModalBtn" href="#" onclick="event.preventDefault()" aria-label="Descargas" aria-haspopup="dialog">
-                <i class="fa-solid fa-download" aria-hidden="true"></i>
-                <span class="header-label">Descargas</span>
-            </a>
+            <button class="header-redes">
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                <span class="header-txt">Instagram</span>
+            </button>
+            
+            <button type="button" class="button-descargas" id="openModalBtn" href="#" onclick="event.preventDefault()" aria-label="Descargas" aria-haspopup="dialog">
+                <span class="button__text">Descargas</span>
+                <span class="button__icon"> 
+                    <i class="fa-solid fa-download" aria-hidden="true"></i>
+                </span>
+            </button>
         </nav>
     </header>
 
@@ -72,7 +79,7 @@
         <div class="footer-content">
             <p>Hecho con <span aria-label="amor">❤️</span> por <a href="https://github.com/MarcoFlowod" target="_blank" rel="noopener noreferrer">MarcoFlowod</a></p>
             <p class="footer-sub">Proyectos especiales para momentos especiales</p>
-            <p class="footer-credits"> <small>© 2026 Detalles Creeper. Todos los proyectos son de código abierto. </small></p>
+            <p class="footer-credits"> <small>© 2026 Dedica Love. Todos los proyectos son de código abierto. </small></p>
         </div>
     </footer>
 
@@ -91,8 +98,7 @@
                     <div class="modal-icon" aria-hidden="true"><i class="fas fa-gift"></i></div>
                     <h3>¡Proyectos Especiales para Ti!</h3>
                     <p id="modal-description" class="modal-description">
-                        Aquí puedes descargar todos los proyectos creados con amor. Listos para personalizar.
-                    </p>
+                        Aquí puedes descargar todos los proyectos creados.</p>
                    
                     <div class="projects-list">
                         <div class="project-item">
@@ -101,7 +107,7 @@
                         </div>
                         <div class="project-item">
                             <i class="fas fa-images" aria-hidden="true"></i>
-                            <div class="project-info"><h4>Galerías Interactivas</h4><p>Efectos visuales y collages.</p></div>
+                            <div class="project-info"><h4>Galaxias Interactivas</h4><p>Efectos visuales e interactivos.</p></div>
                         </div>
                     </div>
                    

@@ -1,13 +1,8 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-let w, h;
-
-// Polyfill para roundRect (para navegadores antiguos)
+// --- POLIFILL PARA ROUNDRECT ---
 if (!CanvasRenderingContext2D.prototype.roundRect) {
     CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
         if (width < 2 * radius) radius = width / 2;
         if (height < 2 * radius) radius = height / 2;
-        
         this.beginPath();
         this.moveTo(x + radius, y);
         this.arcTo(x + width, y, x + width, y + height, radius);
@@ -15,23 +10,34 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
         this.arcTo(x, y + height, x, y, radius);
         this.arcTo(x, y, x + width, y, radius);
         this.closePath();
-        
         return this;
     };
 }
 
-// Animación y música solo después de apretar el botón
+// --- VARIABLES GLOBALES ---
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let w, h;
 let animacionIniciada = false;
+let animacionIntroID;
+
+// --- INICIO DE LA APLICACIÓN ---
 document.getElementById('btn-iniciar').onclick = iniciarAnimacionYMusica;
 
 function iniciarAnimacionYMusica() {
     if (animacionIniciada) return;
     animacionIniciada = true;
-    document.getElementById('modal-inicio').style.display = 'none';
-    document.getElementById('bg-music').currentTime = 0;
-    document.getElementById('bg-music').play();
 
-    // Variables y arrays
+    // Detener la animación de fondo del modal
+    if (animacionIntroID) cancelAnimationFrame(animacionIntroID);
+    document.getElementById('modal-inicio').style.display = 'none';
+    
+    const music = document.getElementById('bg-music');
+    if(music) {
+        music.currentTime = 0;
+        music.play().catch(e => console.log("Audio bloqueado por el navegador"));
+    }
+
     function resize() {
         w = canvas.width = window.innerWidth;
         h = canvas.height = window.innerHeight;
@@ -39,592 +45,284 @@ function iniciarAnimacionYMusica() {
     window.addEventListener("resize", resize);
     resize();
 
-    // frases románticas
-    const PHRASES = [
-        "Te amo", "Te quiero", "Eres mi vida", "Eres mi todo", 
-        "Mi princesa", "Mi amor", "Eres especial",
-        "Me encantas", "Te adoro ❤", "Fatásnica",
-        "Preciosa", "Eres Perfecta", "Guapa", 
-        "Hermosa", "Bella", "Divina", "Bonita", "Encantadora",
+    // --- CONFIGURACIÓN DE ELEMENTOS ---
+    const PHRASES = ["Te amo", "Te quiero", "Eres mi vida", "Eres mi todo", "Mi princesa", "Mi amor", "Eres especial", "Me encantas", "Te adoro ❤", "Preciosa", "Eres Perfecta", "Guapa", "Hermosa", "Bella"];
+    const imgStyles = [
+        { borderColor: '#ff6b9d' },
+        { borderColor: '#69a3ff' },
+        { borderColor: '#d369ff' }
+    ];
+    const heartColors = ['#ff4d88', '#ff0000', '#ff85a2', '#ff007f', '#ffb3ba', '#00fbff', '#70ff8e'];
+    
+    const imgUrls = [
+        "../imagenes/img1.webp", "../imagenes/img2.webp", "../imagenes/img3.webp",
+        "../imagenes/img4.webp", "../imagenes/img5.webp", "../imagenes/img6.webp"
     ];
 
-    const texts = [];
-    const stars = [];
-    const hearts = [];
-    const explosions = [];
-    
-    // Estilos para imágenes (colores románticos)
-    const imgStyles = [
-        { borderColor: '#ff6b9d', shadowColor: 'rgba(255, 107, 157, 0.6)', name: 'rosa' },
-        { borderColor: '#ff69b4', shadowColor: 'rgba(255, 105, 180, 0.6)', name: 'rosa fuerte' },
-        { borderColor: '#ff9ac8', shadowColor: 'rgba(255, 154, 200, 0.6)', name: 'rosa claro' },
-        { borderColor: '#69a3ff', shadowColor: 'rgba(105, 163, 255, 0.5)', name: 'azul' },
-        { borderColor: '#d369ff', shadowColor: 'rgba(211, 105, 255, 0.5)', name: 'púrpura' },
-        { borderColor: '#ffd369', shadowColor: 'rgba(255, 211, 105, 0.5)', name: 'dorado' }
-    ];
-    
-    // Imágenes flotantes
-    const imgUrls = [
-        "../imagenes/img1.webp",
-        "../imagenes/img2.webp",
-        "../imagenes/img3.webp",
-        "../imagenes/img4.webp",
-        "../imagenes/img5.webp",
-        "../imagenes/img6.webp",
-    ];
-    
     const imgObjs = imgUrls.map(url => {
-        const img = new window.Image();
+        const img = new Image();
         img.src = url;
-        // Manejo de error para imágenes que no cargan
-        img.onerror = function() {
-            console.warn(`No se pudo cargar la imagen: ${url}`);
-            // Crear una imagen de fallback (corazón)
-            crearImagenFallback(img);
-        };
+        img.onerror = () => crearImagenFallback(img);
         return img;
     });
-    
-    const imgDrops = [];
-    
-    // parámetros ajustados para CELULAR
-    const MAX_ACTIVE_TEXTS = 7;
-    const SPAWN_INTERVAL = 1500; // más rápido que antes (1.5 seg)
+
+    let stars = [], hearts = [], texts = [], imgDrops = [], explosions = [];
     let phraseIndex = 0;
-    let offsetX = 0, offsetY = 0, zoom = 1;
-    
-    // Función para crear imagen de fallback (corazón)
-    function crearImagenFallback(imgElement) {
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = 200;
-        tempCanvas.height = 260;
-        const tempCtx = tempCanvas.getContext('2d');
-        
-        // Fondo degradado romántico
-        const gradient = tempCtx.createLinearGradient(0, 0, 200, 260);
-        gradient.addColorStop(0, '#ff9a9e');
-        gradient.addColorStop(1, '#fad0c4');
-        tempCtx.fillStyle = gradient;
-        tempCtx.fillRect(0, 0, 200, 260);
-        
-        // Dibujar corazón
-        tempCtx.fillStyle = '#ff6b6b';
-        tempCtx.beginPath();
-        const centerX = 100, centerY = 130;
-        // Corazón usando curvas Bezier
-        tempCtx.moveTo(centerX, centerY - 40);
-        tempCtx.bezierCurveTo(centerX, centerY - 60, centerX - 40, centerY - 60, centerX - 40, centerY - 20);
-        tempCtx.bezierCurveTo(centerX - 40, centerY + 10, centerX, centerY + 40, centerX, centerY + 60);
-        tempCtx.bezierCurveTo(centerX, centerY + 40, centerX + 40, centerY + 10, centerX + 40, centerY - 20);
-        tempCtx.bezierCurveTo(centerX + 40, centerY - 60, centerX, centerY - 60, centerX, centerY - 40);
-        tempCtx.closePath();
-        tempCtx.fill();
-        
-        // Texto "❤️"
-        tempCtx.font = 'bold 60px Arial';
-        tempCtx.fillStyle = 'white';
-        tempCtx.textAlign = 'center';
-        tempCtx.textBaseline = 'middle';
-        tempCtx.fillText('❤️', 100, 130);
-        
-        imgElement.src = tempCanvas.toDataURL();
+
+    // --- LÓGICA DE DISPERSIÓN (CORREGIDA PARA MÓVIL) ---
+    function getPosFueraDelCentro(maxSize) {
+        const esMovil = window.innerWidth < 768;
+        const multiplicador = esMovil ? 1.5 : 1.5;
+        let pos = (Math.random() - 0.5) * maxSize * multiplicador;
+        const margenSeguridad = maxSize * 0.03; 
+        if (Math.abs(pos) < margenSeguridad) {
+            pos = pos >= 0 ? margenSeguridad : -margenSeguridad;
+        }
+        return pos;
     }
-    
-    // FUNCIÓN PARA DIBUJAR IMÁGENES CON ESTILOS CSS-LIKE (OBJECT-FIT: COVER)
-    function dibujarImagenConEstilos(ctx, img, x, y, width, height, estilos) {
-        ctx.save();
-        
-        // Aplicar rotación si existe
-        if (estilos.rotation) {
-            ctx.translate(x + width/2, y + height/2);
-            ctx.rotate(estilos.rotation);
-            ctx.translate(-x - width/2, -y - height/2);
-        }
-        
-        // Sombra
-        if (estilos.shadow) {
-            ctx.shadowColor = estilos.shadow.color;
-            ctx.shadowBlur = estilos.shadow.blur;
-            ctx.shadowOffsetX = estilos.shadow.offsetX || 0;
-            ctx.shadowOffsetY = estilos.shadow.offsetY || 0;
-        }
-        
-        // Fondo decorativo (marco exterior)
-        if (estilos.marcoExterior) {
-            ctx.fillStyle = estilos.marcoExterior.color;
-            ctx.beginPath();
-            ctx.roundRect(
-                x - estilos.marcoExterior.margin,
-                y - estilos.marcoExterior.margin,
-                width + estilos.marcoExterior.margin * 2,
-                height + estilos.marcoExterior.margin * 2,
-                (estilos.borderRadius || 0) + estilos.marcoExterior.margin
-            );
-            ctx.fill();
-        }
-        
-        // Bordes redondeados (clip)
-        if (estilos.borderRadius) {
-            ctx.beginPath();
-            ctx.roundRect(x, y, width, height, estilos.borderRadius);
-            ctx.clip();
-        }
-        
-        // Opacidad
-        if (estilos.opacity !== undefined) {
-            ctx.globalAlpha = estilos.opacity;
-        }
-        
-        // Filtros (brightness, contrast, saturate, etc.)
-        if (estilos.filter) {
-            ctx.filter = estilos.filter;
-        }
-        
-        // object-fit: cover - ¡LA FUNCIONALIDAD PRINCIPAL!
-        if (estilos.objectFit === 'cover') {
-            // Verificar que la imagen tenga dimensiones
-            const imgWidth = img.naturalWidth || img.width || width;
-            const imgHeight = img.naturalHeight || img.height || height;
-            const imgRatio = imgWidth / imgHeight;
-            const frameRatio = width / height;
-            
-            let sx, sy, sWidth, sHeight;
-            
-            if (imgRatio > frameRatio) {
-                // Imagen más ancha que el marco -> recortar lados
-                sHeight = imgHeight;
-                sWidth = sHeight * frameRatio;
-                sx = (imgWidth - sWidth) / 2;
-                sy = 0;
-            } else {
-                // Imagen más alta que el marco -> recortar arriba/abajo
-                sWidth = imgWidth;
-                sHeight = sWidth / frameRatio;
-                sx = 0;
-                sy = (imgHeight - sHeight) / 2;
-            }
-            
-            ctx.drawImage(
-                img,
-                sx, sy,           // Coordenadas de recorte (source)
-                sWidth, sHeight,  // Tamaño de recorte (source)
-                x, y,             // Coordenadas destino
-                width, height     // Tamaño destino
-            );
-        } 
-        // object-fit: contain (opcional)
-        else if (estilos.objectFit === 'contain') {
-            const imgWidth = img.naturalWidth || img.width || width;
-            const imgHeight = img.naturalHeight || img.height || height;
-            const imgRatio = imgWidth / imgHeight;
-            const frameRatio = width / height;
-            
-            let destWidth, destHeight, destX, destY;
-            
-            if (imgRatio > frameRatio) {
-                // Imagen más ancha -> ajustar al ancho
-                destWidth = width;
-                destHeight = width / imgRatio;
-                destX = x;
-                destY = y + (height - destHeight) / 2;
-            } else {
-                // Imagen más alta -> ajustar al alto
-                destHeight = height;
-                destWidth = height * imgRatio;
-                destX = x + (width - destWidth) / 2;
-                destY = y;
-            }
-            
-            ctx.drawImage(
-                img,
-                0, 0, imgWidth, imgHeight,
-                destX, destY, destWidth, destHeight
-            );
-        }
-        // object-fit: fill (por defecto)
-        else {
-            ctx.drawImage(img, x, y, width, height);
-        }
-        
-        // Borde
-        if (estilos.border) {
-            const borderParts = estilos.border.split(' ');
-            const borderWidth = parseFloat(borderParts[0]) || 2;
-            const borderColor = borderParts[2] || '#ffffff';
-            
-            ctx.strokeStyle = borderColor;
-            ctx.lineWidth = borderWidth;
-            
-            ctx.beginPath();
-            if (estilos.borderRadius) {
-                ctx.roundRect(x, y, width, height, estilos.borderRadius);
-            } else {
-                ctx.rect(x, y, width, height);
-            }
-            ctx.stroke();
-        }
-        
-        // Efecto de brillo interior (si está activado)
-        if (estilos.brilloInterior) {
-            const tiempo = Date.now() * 0.001;
-            const brillo = Math.sin(tiempo * 2 + x * 0.01) * 0.15 + 0.85;
-            
-            ctx.globalCompositeOperation = 'overlay';
-            ctx.fillStyle = `rgba(255, 255, 255, ${estilos.brilloInterior.intensidad * brillo})`;
-            ctx.fillRect(x, y, width, height);
-            ctx.globalCompositeOperation = 'source-over';
-        }
-        
-        // Puntos decorativos en las esquinas (si está activado)
-        if (estilos.puntosEsquinas) {
-            ctx.fillStyle = estilos.puntosEsquinas.color;
-            
-            // Posiciones de las esquinas (ligeramente hacia dentro)
-            const esquinas = [
-                [x + estilos.puntosEsquinas.margin, y + estilos.puntosEsquinas.margin], // superior izquierda
-                [x + width - estilos.puntosEsquinas.margin, y + estilos.puntosEsquinas.margin], // superior derecha
-                [x + estilos.puntosEsquinas.margin, y + height - estilos.puntosEsquinas.margin], // inferior izquierda
-                [x + width - estilos.puntosEsquinas.margin, y + height - estilos.puntosEsquinas.margin]  // inferior derecha
-            ];
-            
-            esquinas.forEach(([px, py]) => {
-                ctx.beginPath();
-                ctx.arc(px, py, estilos.puntosEsquinas.radio, 0, Math.PI * 2);
-                ctx.fill();
-            });
-        }
-        
-        ctx.restore();
-    }
-    
-    // función crear estrellas
+
+    // --- CREADORES ---
     function createStar() {
-        return {
-            x: Math.random() * w,
-            y: Math.random() * h,
-            z: Math.random() * 2000,
-            speed: 1 + Math.random()
+        return { 
+            x: (Math.random() - 0.5) * w * 4, 
+            y: (Math.random() - 0.5) * h * 4, 
+            z: Math.random() * 2000, speed: 5 + Math.random() * 10 
         };
     }
 
-    // corazones
-    function createHeart() {
-        return {
-            x: Math.random() * w,
-            y: Math.random() * h,
-            z: Math.random() * 1600 + 400,
-            speed: 1.5 + Math.random()
+    function createHeart(zValue = 2000) {
+        return { 
+            x: getPosFueraDelCentro(w), 
+            y: getPosFueraDelCentro(h), 
+            z: zValue, 
+            speed: 5 + Math.random() * 5,
+            color: heartColors[Math.floor(Math.random() * heartColors.length)]
         };
     }
 
-    // textos en orden
-    function spawnTextInOrder(){
-        if (texts.length >= MAX_ACTIVE_TEXTS) return;
-        const phrase = PHRASES[phraseIndex % PHRASES.length];
-        phraseIndex++;
-        texts.push({
-            text: phrase,
-            x: Math.random() * w,
-            y: Math.random() * h,
-            z: Math.random() * 1600 + 300,
-            speed: 1.8 + Math.random() * 1.2, // más rápido
-            baseFont: (w < 600 ? 40 : 60),   // fuente clara en móvil
-            glow: 25
-        });
-    }
-
-    // imágenes flotantes CON ESTILOS
-    function createImgDrop() {
-        const estilo = imgStyles[Math.floor(Math.random() * imgStyles.length)];
-        
+    function createImgDrop(zValue = 2000) {
         return {
             img: imgObjs[Math.floor(Math.random() * imgObjs.length)],
-            x: Math.random() * w,
-            y: Math.random() * h,
-            z: Math.random() * 1600 + 400,
-            speed: 1.2 + Math.random() * 0.8,
-            width: (w < 600 ? 130 : 200),
-            height: (w < 600 ? 170 : 260),
-            estilo: estilo, // Estilo asignado
-            rotation: (Math.random() - 0.5) * 0.03, // Rotación leve aleatoria
-            tiempoFlotacion: Math.random() * Math.PI * 2 // Para animación de flotación
+            x: getPosFueraDelCentro(w), 
+            y: getPosFueraDelCentro(h), 
+            z: zValue,
+            speed: 3 + Math.random() * 6, 
+            estilo: imgStyles[Math.floor(Math.random() * imgStyles.length)],
+            rotation: (Math.random() - 0.5) * 0.2,
+            opacity: 0
         };
     }
 
-    // explosiones azules
-    function createExplosion() {
-        const particles = [];
-        const centerX = Math.random() * w;
-        const centerY = Math.random() * h;
-        const particleCount = 30;
-        
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: centerX,
-                y: centerY,
-                vx: (Math.random() - 0.5) * 10,
-                vy: (Math.random() - 0.5) * 10,
-                life: 1,
-                decay: 0.02 + Math.random() * 0.01,
-                size: 2 + Math.random() * 4
-            });
-        }
-        
-        return {
-            particles: particles,
-            age: 0,
-            maxAge: 50
-        };
+    function spawnText() {
+        if (texts.length >= 20) return;
+        texts.push({
+            text: PHRASES[phraseIndex++ % PHRASES.length],
+            x: getPosFueraDelCentro(w), 
+            y: getPosFueraDelCentro(h), 
+            z: 3000, 
+            speed: 7 + Math.random() * 5, 
+            baseFont: (w < 600 ? 35 : 55)
+        });
     }
 
-    // inicializar
+    // Inicialización
     for (let i = 0; i < 400; i++) stars.push(createStar());
-    for (let i = 0; i < 30; i++) hearts.push(createHeart());
-    for (let i = 0; i < 6; i++) imgDrops.push(createImgDrop());
+    for (let i = 0; i < 6; i++) {
+        hearts.push(createHeart(Math.random() * 3000));
+        imgDrops.push(createImgDrop(Math.random() * 3000));
+    }
 
-    // animación
+    // --- LOOP PRINCIPAL (SOLUCIÓN AL RASTRO) ---
     function animate() {
-        ctx.clearRect(0, 0, w, h);
+        // Limpiar el canvas totalmente
+        ctx.save();
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0; // Reset sombra para la limpieza
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, w, h);
+        ctx.restore();
 
-        // Crear array de todos los elementos con su profundidad z
-        const allElements = [];
+        // Dibujar Nebulosa
+        ctx.save();
+        const grad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, Math.max(w, h) * 0.6);
+        grad.addColorStop(0, 'rgba(40, 20, 100, 0.3)'); 
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');        
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+        ctx.restore();
 
-        // Agregar estrellas
-        stars.forEach(s => {
-            s.z -= s.speed;
-            if (s.z <= 0) {
-                s.x = Math.random() * w;
-                s.y = Math.random() * h;
-                s.z = 2000;
+        let allElements = [];
+        stars.forEach(s => { s.z -= s.speed; if (s.z <= 0) s.z = 5000; allElements.push({ type: 'star', obj: s }); });
+        hearts.forEach((hObj, i) => {
+            hObj.z -= hObj.speed;
+            if (hObj.z <= 10) {
+                const scale = 400 / 10;
+                crearExplosionFisica(hObj.x * scale + w/2, hObj.y * scale + h/2, hObj.color);
+                hearts[i] = createHeart(5000);
             }
-            allElements.push({type: 'star', obj: s});
+            allElements.push({ type: 'heart', obj: hObj });
+        });
+        texts.forEach((t, i) => { t.z -= t.speed; if (t.z <= 10) texts.splice(i, 1); else allElements.push({ type: 'text', obj: t }); });
+        imgDrops.forEach(img => {
+            img.z -= img.speed;
+            if (img.opacity < 1) img.opacity += 0.02;
+            if (img.z <= 10) Object.assign(img, createImgDrop(4000));
+            allElements.push({ type: 'image', obj: img });
         });
 
-        // Agregar textos
-        texts.forEach((t, i) => {
-            t.z -= t.speed;
-            if (t.z <= 0) {
-                texts.splice(i,1);
-                return;
-            }
-            allElements.push({type: 'text', obj: t});
-        });
-
-        // Agregar corazones
-        hearts.forEach(c => {
-            c.z -= c.speed;
-            if (c.z <= 0) {
-                c.x = Math.random() * w;
-                c.y = Math.random() * h;
-                c.z = 2000;
-            }
-            allElements.push({type: 'heart', obj: c});
-        });
-
-        // Agregar imágenes CON ESTILOS Y ANIMACIÓN DE FLOTACIÓN
-        imgDrops.forEach(imgDrop => {
-            imgDrop.z -= imgDrop.speed;
-            
-            // Animación de flotación suave
-            const tiempo = Date.now() * 0.001;
-            imgDrop.tiempoFlotacion += 0.01;
-            
-            // Movimiento leve de flotación (como si estuvieran en el agua)
-            imgDrop.x += Math.sin(imgDrop.tiempoFlotacion) * 0.2;
-            imgDrop.y += Math.cos(imgDrop.tiempoFlotacion * 0.8) * 0.15;
-            
-            if (imgDrop.z <= 0) {
-                imgDrop.x = Math.random() * w;
-                imgDrop.y = Math.random() * h;
-                imgDrop.z = 2000;
-                imgDrop.img = imgObjs[Math.floor(Math.random() * imgObjs.length)];
-                // Asignar nuevo estilo aleatorio
-                imgDrop.estilo = imgStyles[Math.floor(Math.random() * imgStyles.length)];
-            }
-            allElements.push({type: 'image', obj: imgDrop});
-        });
-
-        // Actualizar explosiones
-        explosions.forEach((explosion, i) => {
-            explosion.age++;
-            if (explosion.age > explosion.maxAge) {
-                explosions.splice(i, 1);
-                return;
-            }
-            
-            explosion.particles.forEach(particle => {
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-                particle.life -= particle.decay;
-                particle.vx *= 0.98;
-                particle.vy *= 0.98;
-            });
-            
-            allElements.push({type: 'explosion', obj: explosion});
-        });
-
-        // Ordenar por profundidad z (mayor z = más atrás, menor z = más adelante)
         allElements.sort((a, b) => b.obj.z - a.obj.z);
 
-        // Renderizar todos los elementos en orden de profundidad
-        allElements.forEach(element => {
-            const obj = element.obj;
-            
-            if (element.type === 'star') {
-                const scale = 300 / obj.z * zoom;
-                const x = (obj.x - w/2 + offsetX) * scale + w/2;
-                const y = (obj.y - h/2 + offsetY) * scale + h/2;
+        allElements.forEach(el => {
+            const o = el.obj;
+            const scale = 400 / Math.max(o.z, 1);
+            const x = o.x * scale + w/2;
+            const y = o.y * scale + h/2;
+
+            ctx.save();
+            if (el.type === 'star') {
                 ctx.fillStyle = "white";
-                ctx.fillRect(x, y, scale*1.5, scale*1.5);
-            }
-            
-            else if (element.type === 'text') {
-                const scale = 250 / obj.z * zoom;
-                const x = (obj.x - w/2 + offsetX) * scale + w/2;
-                const y = (obj.y - h/2 + offsetY) * scale + h/2;
-                ctx.save();
-                ctx.translate(x, y);
-                ctx.scale(scale, scale);
-                ctx.font = `bold ${obj.baseFont}px Arial`;
+                ctx.globalAlpha = Math.max(0, Math.min(1, (5000 - o.z) / 5000));
+                ctx.fillRect(x, y, scale * 1.5, scale * 1.5);
+            } 
+            else if (el.type === 'heart') {
+                ctx.font = `${Math.floor(150 * scale)}px Arial`;
+                ctx.textAlign = "center";
+                ctx.fillStyle = o.color;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = o.color;
+                ctx.fillText("❤", x, y);
+            } 
+            else if (el.type === 'text') {
+                ctx.font = `bold ${Math.floor(o.baseFont * scale)}px Arial`;
                 ctx.fillStyle = "white";
-                ctx.shadowColor = "white";
-                ctx.shadowBlur = obj.glow;
                 ctx.textAlign = "center";
-                ctx.fillText(obj.text, 0, 0);
-                ctx.restore();
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = `hsl(${Date.now() * 0.05 % 360}, 70%, 70%)`;
+                ctx.fillText(o.text, x, y);
+            } 
+            else if (el.type === 'image') {
+                ctx.globalAlpha = o.opacity;
+                const iw = (w < 600 ? 140 : 220) * scale;
+                const ih = (w < 600 ? 180 : 280) * scale;
+                dibujarImagenCustom(ctx, o.img, x, y, iw, ih, o);
             }
-            
-            else if (element.type === 'heart') {
-                const scale = 220 / obj.z * zoom;
-                const x = (obj.x - w/2 + offsetX) * scale + w/2;
-                const y = (obj.y - h/2 + offsetY) * scale + h/2;
-                ctx.save();
-                ctx.translate(x, y);
-                ctx.scale(scale*2, scale*2);
-                ctx.font = "bold 28px Arial";
-                ctx.fillStyle = "blue";
-                ctx.shadowColor = "blue";
-                ctx.shadowBlur = 20;
-                ctx.textAlign = "center";
-                ctx.fillText("❤", 0, 0);
-                ctx.restore();
-            }
-            
-            else if (element.type === 'image') {
-                // ESCALA Y POSICIÓN
-                const scale = 120 / obj.z * zoom;
-                const x = (obj.x - w/2 + offsetX) * scale + w/2;
-                const y = (obj.y - h/2 + offsetY) * scale + h/2;
-                const ancho = obj.width * scale;
-                const alto = obj.height * scale;
-                
-                // Calcular márgenes y radio basados en escala
-                const margin = 6 * scale;
-                const borderRadius = 12 * scale;
-                const puntosMargin = 4 * scale;
-                const puntosRadio = 1.5 * scale;
-                
-                // Configurar estilos CSS-like para la imagen
-                const estilos = {
-                    objectFit: 'cover',  // ¡OBJECT-FIT: COVER ACTIVADO!
-                    borderRadius: borderRadius,
-                    border: `${2.5 * scale}px solid ${obj.estilo.borderColor}`,
-                    filter: 'brightness(1.05) saturate(1.1)',
-                    opacity: 0.95,
-                    rotation: obj.rotation,
-                    shadow: {
-                        color: obj.estilo.shadowColor,
-                        blur: 25 * scale,
-                        offsetX: 0,
-                        offsetY: 5 * scale
-                    },
-                    marcoExterior: {
-                        color: 'rgba(255, 255, 255, 0.08)',
-                        margin: margin
-                    },
-                    brilloInterior: {
-                        activado: true,
-                        intensidad: 0.08
-                    },
-                    puntosEsquinas: {
-                        activado: true,
-                        color: obj.estilo.borderColor,
-                        margin: puntosMargin,
-                        radio: puntosRadio
-                    }
-                };
-                
-                // Usar la función de dibujo con estilos CSS-like
-                dibujarImagenConEstilos(
-                    ctx,
-                    obj.img,
-                    x - ancho/2,  // x
-                    y - alto/2,   // y
-                    ancho,        // width
-                    alto,         // height
-                    estilos       // estilos CSS-like
-                );
-            }
-            
-            else if (element.type === 'explosion') {
-                ctx.save();
-                obj.particles.forEach(particle => {
-                    if (particle.life > 0) {
-                        ctx.globalAlpha = particle.life;
-                        ctx.fillStyle = "blue";
-                        ctx.shadowColor = "blue";
-                        ctx.shadowBlur = 10;
-                        ctx.beginPath();
-                        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                });
-                ctx.restore();
-            }
+            ctx.shadowBlur = 0;
+            ctx.restore();
         });
 
+        dibujarExplosiones();
         requestAnimationFrame(animate);
     }
 
-    animate();
-    setInterval(spawnTextInOrder, SPAWN_INTERVAL);
-    
-    // Crear explosiones cada 5 segundos
-    setInterval(() => {
-        explosions.push(createExplosion());
-    }, 5000);
+    function dibujarImagenCustom(ctx, img, x, y, width, height, data) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(data.rotation);
+        ctx.beginPath();
+        ctx.roundRect(-width/2, -height/2, width, height, 15 * (width/200));
+        ctx.clip();
+        ctx.drawImage(img, -width/2, -height/2, width, height);
+        ctx.strokeStyle = data.estilo.borderColor;
+        ctx.lineWidth = 5 * (width/200);
+        ctx.stroke();
+        ctx.restore();
+    }
 
-    // controles táctiles para mover
-    let startX=0,startY=0;
-    canvas.addEventListener("touchstart", e=>{
-        const t=e.touches[0];
-        startX=t.clientX;
-        startY=t.clientY;
-    });
-    
-    canvas.addEventListener("touchmove", e=>{
-        e.preventDefault();
-        const t=e.touches[0];
-        offsetX += (t.clientX-startX)/3;
-        offsetY += (t.clientY-startY)/3;
-        startX=t.clientX;
-        startY=t.clientY;
-    }, { passive: false });
-
-    // zoom con dos dedos
-    let lastDist=0;
-    canvas.addEventListener("touchmove", e=>{
-        if(e.touches.length===2){
-            const dx=e.touches[0].clientX-e.touches[1].clientX;
-            const dy=e.touches[0].clientY-e.touches[1].clientY;
-            const dist=Math.sqrt(dx*dx+dy*dy);
-            if(lastDist){
-                zoom *= dist/lastDist;
-                zoom=Math.min(Math.max(0.5,zoom),3);
-            }
-            lastDist=dist;
+    function crearExplosionFisica(x, y, color) {
+        for (let i = 0; i < 15; i++) {
+            explosions.push({ x, y, vx: (Math.random() - 0.5) * 10, vy: (Math.random() - 0.5) * 10, life: 1, size: Math.random() * 5 + 2, color });
         }
-    });
-    
-    canvas.addEventListener("touchend", ()=> lastDist=0);
+    }
+
+    function dibujarExplosiones() {
+        for (let i = explosions.length - 1; i >= 0; i--) {
+            let p = explosions[i];
+            p.x += p.vx; p.y += p.vy; p.life -= 0.02;
+            if (p.life <= 0) explosions.splice(i, 1);
+            else {
+                ctx.save();
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.life;
+                ctx.beginPath(); 
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); 
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+    }
+
+    function crearImagenFallback(img) {
+        const c = document.createElement('canvas');
+        c.width = 200; c.height = 260;
+        const tt = c.getContext('2d');
+        tt.fillStyle = '#222'; tt.fillRect(0,0,200,260);
+        img.src = c.toDataURL();
+    }
+
+    animate();
+    setInterval(spawnText, 800);
 }
+
+// --- SECCIÓN INTRO (loveCanvas) ---
+const introCanvas = document.getElementById('loveCanvas');
+const iCtx = introCanvas.getContext('2d');
+let introParticles = [];
+
+function resizeIntro() {
+    introCanvas.width = window.innerWidth;
+    introCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeIntro);
+resizeIntro();
+
+class HeartParticle {
+    constructor() { this.init(); }
+    init() {
+        this.x = Math.random() * introCanvas.width;
+        this.y = introCanvas.height + Math.random() * 100;
+        const esMovil = window.innerWidth < 480;
+        this.size = Math.random() * (esMovil ? 25 : 15) + (esMovil ? 10 : 5);
+        this.speedY = Math.random() * 1 + 0.5;
+        this.opacity = Math.random() * 0.5 + 0.5;
+        this.fadeSpeed = Math.random() * 0.005 + 0.002;
+        const tones = ['#b38bff', '#8a2be2', '#d8b4fe', '#ffffff'];
+        this.color = tones[Math.floor(Math.random() * tones.length)];
+        this.isSparkle = Math.random() > 0.7;
+    }
+    draw() {
+        iCtx.save();
+        iCtx.globalAlpha = this.opacity;
+        iCtx.shadowBlur = 15;
+        iCtx.shadowColor = this.color;
+        iCtx.strokeStyle = this.color;
+        iCtx.lineWidth = 1.5;
+        iCtx.beginPath();
+        if (this.isSparkle) {
+            iCtx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+            iCtx.fillStyle = "white"; iCtx.fill();
+        } else {
+            const x = this.x, y = this.y, s = this.size;
+            iCtx.moveTo(x, y);
+            iCtx.bezierCurveTo(x, y - s/2, x - s, y - s/2, x - s, y);
+            iCtx.bezierCurveTo(x - s, y + s/2, x, y + s, x, y + s * 1.3);
+            iCtx.bezierCurveTo(x, y + s, x + s, y + s/2, x + s, y);
+            iCtx.bezierCurveTo(x + s, y - s/2, x, y - s/2, x, y);
+            iCtx.stroke();
+        }
+        iCtx.restore();
+    }
+    update() {
+        this.y -= this.speedY;
+        this.opacity -= this.fadeSpeed;
+        if (this.opacity <= 0 || this.y < -50) this.init();
+    }
+}
+
+function animateIntro() {
+    iCtx.clearRect(0, 0, introCanvas.width, introCanvas.height);
+    introParticles.forEach(p => { p.update(); p.draw(); });
+    animacionIntroID = requestAnimationFrame(animateIntro);
+}
+
+for (let i = 0; i < (window.innerWidth < 480 ? 15 : 50); i++) introParticles.push(new HeartParticle());
+animateIntro();
