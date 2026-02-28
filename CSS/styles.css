@@ -223,18 +223,17 @@ button:focus {
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: var(--color-bg-dark);
+    background-color: rgba(14, 13, 13, 0.9);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: var(--space-sm) var(--space-xl);
     border-bottom: 1px solid var(--color-border);
     backdrop-filter: blur(10px);
-    background-color: rgba(14, 13, 13, 0.9);
 }
 
 .header-logo {
-    width: 150px;
+    width: 120px;
     transition: transform var(--transition-fast);
 }
 

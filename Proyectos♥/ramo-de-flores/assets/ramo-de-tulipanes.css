@@ -97,14 +97,20 @@ canvas {
     margin-top: 200px;
     display: grid;
     place-items: center;
+    animation: up 3s linear infinite;
 }
 
+@keyframes up {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
 .superior {
     position: absolute;
     border-left: 220px solid transparent;
     border-right: 220px solid transparent;
     border-top: 160px solid #f08080;
     border-bottom: 160px solid transparent;
+
 
     transition: transform .75s, z-index 0s;
     transform-origin: top;
@@ -159,6 +165,7 @@ canvas {
     position: absolute;
     inset: 0;
     margin: 20px;
+    border-radius: 30px;
 }
 
 

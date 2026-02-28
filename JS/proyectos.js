@@ -24,7 +24,7 @@ const proyectos = [
         urlDedicar: "en-proceso",
         imagen: "./assets/img/imagen-3.webp",
         alt: "Zoom galaxia interactiva",
-        layout: "tall wide"
+        layout: ""
     },    
     {
         id: 4,
